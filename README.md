@@ -1,5 +1,7 @@
 # Skybridge Digital Studios — website
 
+Dominio: https://www.skybridgestd.space/
+
 Sitio estático de una sola página (HTML, CSS y JS en un archivo), bilingüe EN/ES.
 Es una copia exacta del artifact de Claude (versión `1795132498-e0b8`, 19 nov 2026): fondo gris suave, acento verde, logo monograma.
 
@@ -8,6 +10,7 @@ Es una copia exacta del artifact de Claude (versión `1795132498-e0b8`, 19 nov 2
 ```
 public/index.html                    el sitio completo
 public/Digital-Accounting-Tax/       demo para el cliente Digital Accounting & Tax Inc.
+netlify/edge-functions/demo-acceso.ts  acceso privado al demo (solo con enlace de acceso)
 netlify.toml                         configuración de Netlify (publica public/, sin build)
 ```
 
@@ -18,6 +21,11 @@ Sitio de muestra para presentar a Carlos Moran (Digital Accounting & Tax Inc.). 
 - `/Digital-Accounting-Tax/` envía a `es/` o `en/` según el idioma del navegador.
 - Páginas: `es/index.html`, `servicios`, `itin`, `nosotros`, `contacto`, `privacidad`, `cookies`, `terminos`, `accesibilidad`, y sus equivalentes en `en/`.
 - `/Digital-Accounting-Tax/telefono.html`: el sitio dentro de dos iPhones (español e inglés), con selector de paleta, para presentarlo.
+- **Privada.** Solo entra quien abre el enlace de acceso `https://www.skybridgestd.space/Digital-Accounting-Tax/?acceso=LLAVE`. La función `netlify/edge-functions/demo-acceso.ts` revisa la llave, guarda una cookie por 30 días y quita la llave de la barra de direcciones. Cualquier otra persona recibe "Esta página no está disponible" (404), sin HTML, imágenes ni estilos del demo.
+  - La llave vive en Netlify, no en este repositorio: **Site configuration → Environment variables → `DAT_ACCESS_KEY`**. Puede tener varias llaves separadas por espacios.
+  - Opcional: `DAT_ACCESS_UNTIL` con una fecha (`2027-01-31`). Después de esa fecha nadie entra.
+  - Para quitar el acceso: cambia o borra `DAT_ACCESS_KEY` y vuelve a publicar. Las cookies viejas dejan de servir.
+  - Si `DAT_ACCESS_KEY` no existe, el demo queda cerrado para todos.
 - No está enlazada desde la página principal y no se indexa en Google (`noindex` en cada página y `X-Robots-Tag` en `netlify.toml`). Cada página muestra una etiqueta "Demo de Skybridge Digital Studios".
 - Cuando el cliente apruebe, la versión de producción (con canonical, hreflang, sitemap y robots apuntando a digital.tax) se publica en su propio dominio, no aquí.
 

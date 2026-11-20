@@ -222,16 +222,6 @@ details.q p{margin-top:12px;color:var(--muted)}
 .chips span{font-size:.78rem;font-weight:600;padding:3px 9px;border-radius:6px;background:var(--bg2);color:var(--muted)}
 .chips .live{color:#1b8a4b;background:rgba(27,138,75,.09)}
 .side{display:grid;gap:24px;align-content:start}
-.wfeat{grid-column:1/-1;display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:clamp(24px,4vw,56px);align-items:center}
-.shot{position:relative;margin:0;padding:0 4% 7% 0}
-.shot img{display:block;height:auto}
-.shot .desk{width:100%;border-radius:10px;border:1px solid var(--line);box-shadow:0 30px 60px -38px rgba(10,22,36,.6)}
-.shot .mob{position:absolute;right:0;bottom:0;width:21%;border-radius:18px;border:5px solid #1c1b19;background:#1c1b19;box-shadow:0 24px 40px -22px rgba(10,22,36,.6)}
-.wfeat dl{display:grid;grid-template-columns:auto 1fr;gap:10px 22px;margin:6px 0 0;font-size:.95rem}
-.wfeat dt{color:var(--muted)}
-.wfeat dd{margin:0;font-weight:500}
-.wfeat .acts{display:flex;gap:12px;flex-wrap:wrap;margin-top:10px}
-.chips .prop{color:#9a5b12;background:rgba(196,122,28,.12)}
 
 /* apps */
 .apps{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px}
@@ -346,7 +336,7 @@ dialog{background:color-mix(in srgb,var(--bg) 90%,transparent);-webkit-backdrop-
   .zoom{transition:transform .2s linear;transform:scale(var(--z,1))}
 }
 @media (max-width:960px){
-  .hgrid,.case,.work,.wfeat,.about,.quote,.apps,.svcgrid,.faq{grid-template-columns:1fr}
+  .hgrid,.case,.work,.about,.quote,.apps,.svcgrid,.faq{grid-template-columns:1fr}
   .tpls,.teaser,.tease3{grid-template-columns:repeat(2,minmax(0,1fr))}
   .teaser figure:nth-child(3){display:none}
   .steps{grid-template-columns:repeat(2,minmax(0,1fr))}
@@ -367,7 +357,7 @@ dialog{background:color-mix(in srgb,var(--bg) 90%,transparent);-webkit-backdrop-
   .scol:first-child{border-top:0}
   .app{grid-template-columns:1fr}
   .phone{width:34%}
-  .sbox{grid-template-columns:1fr}.sbox .mini{display:none}.shot{padding:0}.shot .mob{display:none}
+  .sbox{grid-template-columns:1fr}.sbox .mini{display:none}
 }
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
 
@@ -669,22 +659,6 @@ dialog{background:color-mix(in srgb,var(--bg) 90%,transparent);-webkit-backdrop-
           <a class="btn small" href="#contact" style="justify-self:start;margin-top:6px" data-i18n="w14">Start a project</a>
         </article>
       </div>
-      <article class="wcard wfeat">
-        <figure class="shot">
-          <img class="desk" src="work/dat-desktop.webp" width="1200" height="750" loading="lazy" alt="Home page of the Digital Accounting &amp; Tax website proposal, in Spanish">
-          <img class="mob" src="work/dat-mobile.webp" width="360" height="720" loading="lazy" alt="" aria-hidden="true">
-        </figure>
-        <div style="display:grid;gap:12px;align-content:start">
-          <div class="chips"><span class="prop" data-i18n="dat1">Proposal</span><span data-i18n="dat2">Bilingual website</span></div>
-          <h3 data-i18n="dat3">Digital Accounting &amp; Tax, a website proposal</h3>
-          <p class="muted" data-i18n="dat4">A tax and bookkeeping office in Philadelphia whose clients are mostly Spanish speakers. We designed a bilingual site with their real storefront, hours and map, a page for each service, and WhatsApp contact in one tap.</p>
-          <dl>
-            <dt data-i18n="cs1">Scope</dt><dd data-i18n="dat5">Design, copy in two languages, 9 pages per language, local SEO, legal pages</dd>
-            <dt data-i18n="dat6">Status</dt><dd data-i18n="dat7">Proposal, not commissioned yet. Not the firm's official site.</dd>
-          </dl>
-          <div class="acts"><a class="btn primary small" href="Digital-Accounting-Tax/en/" data-href-en="Digital-Accounting-Tax/en/" data-href-es="Digital-Accounting-Tax/es/" target="_blank" rel="noopener" data-i18n="dat8">See the demo</a><a class="btn small" href="Digital-Accounting-Tax/telefono.html" target="_blank" rel="noopener" data-i18n="dat9">See it on a phone</a></div>
-        </div>
-      </article>
     </div>
   </section>
 </div>
@@ -846,7 +820,6 @@ var store={get:function(k){try{return localStorage.getItem(k)}catch(e){return nu
 function L(p){return p[lang==='es'?1:0]}
 
 var ES={
-dat1:'Propuesta',dat2:'Web bilingüe',dat3:'Digital Accounting &amp; Tax, propuesta de sitio web',dat4:'Una oficina de impuestos y contabilidad en Filadelfia con clientes en su mayoría hispanohablantes. Diseñamos un sitio bilingüe con su fachada real, horario y mapa, una página por servicio y contacto por WhatsApp con un toque.',dat5:'Diseño, textos en dos idiomas, 9 páginas por idioma, SEO local, páginas legales',dat6:'Estado',dat7:'Propuesta, aún sin contratar. No es el sitio oficial de la empresa.',dat8:'Ver la demo',dat9:'Verla en el teléfono',
 n0:'Inicio',n7:'Servicios',n8:'Nosotros',n9:'Menú',hm0:'Páginas web, apps y automatización con IA',st1:'estados donde trabajamos',st2:'idiomas, inglés y español',st3:'plantillas listas para personalizar',hm1:'Empieza con una página web. Agrega lo demás <em>cuando lo necesites.</em>',bw1:'Páginas web',bw2:'Páginas rápidas, pensadas para el teléfono, con reservas, menú o tienda integrados. Fáciles de actualizar después.',bw3:'Creamos y mantenemos las nuestras, como Stylo.',lk1:'Ver servicios →',lk2:'Ver nuestras apps →',hm5:'¿Tienes un proyecto en mente?',hm6:'Cuéntanos qué necesitas y te respondemos con preguntas o una cotización por escrito.',hm7:'Ver servicios',sv1:'Servicios',sv2:'Lo que podemos hacer por tu negocio y cómo va normalmente un proyecto.',ab1:'Sobre nosotros',ab3:'Registrada en New Jersey como Skybridge Digital Studios LLC',ab4:'Trabajamos con clientes en los 50 estados',ab5:'Todo lo que entregamos viene en inglés, español o ambos',n1:'Trabajos',n2:'Plantillas',n3:'Precios',n4:'Apps',n5:'Preguntas',n6:'Pedir cotización',
 h1:'Páginas web que te traen clientes, hechas y cuidadas por nosotros.',
 h2:'Skybridge diseña páginas web, apps y automatizaciones sencillas para pequeños negocios en todo Estados Unidos, en inglés y en español. Trabajas directamente con quienes la construyen y recibes un precio por escrito antes de empezar.',
@@ -959,7 +932,6 @@ function setLang(l){
   lang=l; root.lang=l; store.set('sb-lang',l);
   $$('[data-i18n]').forEach(function(el){var k=el.dataset.i18n; el.innerHTML=(l==='es'&&ES[k])?ES[k]:EN[k]});
   $$('[data-lang]').forEach(function(b){b.setAttribute('aria-pressed',b.dataset.lang===l)});
-  $$('[data-href-es]').forEach(function(a){a.setAttribute('href',l==='es'?a.dataset.hrefEs:a.dataset.hrefEn)});
   renderTpls(); renderOpts(); splitStmt(); if(typeof onScroll==='function'&&$('#dialT')) setTimeout(onScroll,0); if(typeof movePills==='function') requestAnimationFrame(movePills); if(typeof renderPrices==='function'){renderPrices(); if(ldlg.open) renderLegal();} $('#q-res').classList.remove('show'); $('#q-err').textContent='';
 }
 $$('[data-lang]').forEach(function(b){b.addEventListener('click',function(){setLang(b.dataset.lang)})});

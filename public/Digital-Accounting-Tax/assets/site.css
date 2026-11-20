@@ -512,3 +512,11 @@ footer{background:var(--night);color:var(--on-night-muted);font-size:14.5px;bord
 .skip{position:absolute;left:12px;top:-60px;z-index:80;background:var(--card);color:var(--ink);padding:10px 14px;border-radius:8px;font-weight:600}
 .skip:focus{top:12px}
 .embed .dock{display:none}
+
+/* studio credit */
+.foot{padding-bottom:30px}
+.credit-wrap{padding-bottom:136px}
+.credit{margin:0;padding-top:18px;border-top:1px solid color-mix(in srgb,var(--on-night) 10%,transparent);font-size:13.5px;letter-spacing:.005em;color:var(--on-night-muted)}
+.credit a{color:var(--on-night);font-weight:600;text-decoration:none;background-image:linear-gradient(var(--accent),var(--accent));background-size:100% 1px;background-position:0 100%;background-repeat:no-repeat;padding-bottom:2px;transition:color .2s}
+.credit a:hover{color:var(--accent)}
+.credit a:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:2px}
