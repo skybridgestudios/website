@@ -135,16 +135,10 @@ header.top{position:sticky;top:0;z-index:50;background:color-mix(in srgb,var(--b
   .dark .btn.primary:hover{background:#2f8a58;border-color:#2f8a58}
 }
 .dark :focus-visible{outline-color:var(--neon)}
-.hero.dark{position:relative;overflow:hidden;isolation:isolate;padding-block:clamp(22px,3vw,36px) clamp(56px,7vw,96px)}
+.hero.dark{position:relative;overflow:hidden;isolation:isolate;padding-block:clamp(56px,7vw,104px) clamp(56px,7vw,96px)}
 .dots{position:absolute;inset:0;z-index:-2;width:100%;height:100%;display:block;pointer-events:none}
 /* faint scanlines, inside the hero only */
 .hero.dark::after{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background:repeating-linear-gradient(0deg,rgba(255,255,255,.03) 0 1px,transparent 1px 3px)}
-.hud{display:flex;flex-wrap:wrap;align-items:center;gap:6px 22px;max-width:none;margin:0 0 clamp(36px,5vw,68px);padding-bottom:14px;border-bottom:1px solid var(--night-line);font:500 .72rem/1.5 var(--mono);letter-spacing:.06em;text-transform:uppercase;color:rgba(232,239,233,.55)}
-.hud>span{display:inline-flex;align-items:center;gap:8px}
-.hud time{color:var(--night-ink);font-variant-numeric:tabular-nums}
-.hud .dot{width:6px;height:6px;border-radius:50%;background:var(--neon)}
-.hud .xy{margin-left:auto;color:var(--neon);font-variant-numeric:tabular-nums}
-@media (pointer:coarse),(max-width:760px){.hud .xy{display:none}}
 .hgrid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.02fr);gap:clamp(32px,5vw,72px);align-items:center}
 /* the hero enters once, on the first load of the home page (html.intro is set in <head>); never on later page switches */
 @keyframes heroIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
@@ -152,8 +146,10 @@ header.top{position:sticky;top:0;z-index:50;background:color-mix(in srgb,var(--b
 @keyframes fadeIn{from{opacity:0}to{opacity:1}}
 html.intro .hero [data-in]{animation:heroIn .55s var(--ease-out) both;animation-delay:var(--d,0ms)}
 html.intro .hero .devices[data-in]{animation-name:heroVisual}
-.hero h1{font-size:clamp(2.6rem,5.2vw,4.5rem);line-height:1;letter-spacing:-.04em;max-width:13ch}
+.hero h1{font-size:clamp(2.4rem,4.4vw,4rem);line-height:1;letter-spacing:-.04em}
 .kw{color:var(--neon)}
+/* reserved room for the longest keyword sits above the heading, never between it and the text */
+.h1box{display:flex;flex-direction:column;justify-content:flex-end}
 .hgrid .lead{margin-top:24px;max-width:46ch}
 .pick{margin-top:30px}
 .pq{font:500 .72rem/1.4 var(--mono);letter-spacing:.06em;text-transform:uppercase;color:rgba(232,239,233,.55);margin-bottom:12px}
@@ -626,16 +622,9 @@ dialog{background:color-mix(in srgb,var(--bg) 90%,transparent);-webkit-backdrop-
   <div class="hero dark" id="hero">
     <canvas class="dots" id="dots" aria-hidden="true"></canvas>
     <div class="wrap">
-      <p class="hud" data-in>
-        <span><i class="dot" aria-hidden="true"></i>New Jersey · <time id="njTime">--:--:--</time></span>
-        <span data-i18n="hd1">Replies in about 2 business days</span>
-        <span>EN / ES</span>
-        <span data-i18n="hd2">Remote · anywhere in the US</span>
-        <span class="xy" id="xy" aria-hidden="true">x 0000 · y 0000</span>
-      </p>
       <div class="hgrid">
         <div>
-          <h1 data-in style="--d:40ms"><span data-i18n="h1a">Websites for your</span> <span class="kw" id="kw">restaurant</span>.</h1>
+          <div class="h1box"><h1 data-in style="--d:40ms"><span data-i18n="h1a">Websites for your</span> <span class="kw" id="kw">restaurant</span>.</h1></div>
           <p class="lead" data-in style="--d:90ms" data-i18n="h2">We design, build and look after websites, apps and simple AI for small businesses across the US, in English and Spanish. You get a written price before anything starts.</p>
           <div class="pick" data-in style="--d:140ms">
             <p class="pq" id="pq" data-i18n="pq">What kind of business do you have?</p>
@@ -972,8 +961,6 @@ n6:'Pedir cotización',
 h1a:'Páginas web para tu',
 h2:'Diseñamos, construimos y cuidamos páginas web, apps e IA sencilla para pequeños negocios en todo Estados Unidos, en inglés y en español. Recibes un precio por escrito antes de empezar.',
 pq:'¿Qué tipo de negocio tienes?',
-hd1:'Respondemos en unos 2 días hábiles',
-hd2:'Remoto · en todo EE. UU.',
 ai1:'Cliente: ¿Tienen mesa para cuatro a las 8?',
 ai2:'IA: Sí, reservada a las 8:00 a nombre de María. Te llega un mensaje.',
 ai3:'→ Resumen enviado por mensaje',
@@ -1397,9 +1384,9 @@ function frame(t){return '<div class="frame" aria-hidden="true"><div class="chro
 var BIZ=[
  ['mesa',['Restaurant','Restaurante'],['restaurant','restaurante']],
  ['fade',['Barbershop','Barbería'],['barbershop','barbería']],
- ['level',['Contractor','Contratista'],['contracting business','empresa de construcción']],
+ ['level',['Contractor','Contratista'],['trade business','constructora']],
  ['counter',['Shop','Tienda'],['shop','tienda']],
- ['ledger',['Accountant','Contador'],['accounting firm','despacho contable']],
+ ['ledger',['Accountant','Contador'],['accounting firm','contaduría']],
  ['tune',['Auto shop','Taller'],['auto shop','taller']]
 ];
 /* each sample's phone screen: its colours, type, photo and three lines */
@@ -1460,10 +1447,10 @@ function setHero(id){
 }
 /* the heading keeps the height of its longest keyword, so changing business (or the letters decoding) never moves the page */
 function holdH1(){
-  var h=$('.hero h1'), k=$('#kw'); if(!h||!h.offsetWidth||k._scr) return;
-  var cur=k.textContent, max=0; h.style.minHeight='';
+  var h=$('.hero h1'), box=$('.h1box'), k=$('#kw'); if(!h||!h.offsetWidth||k._scr) return;
+  var cur=k.textContent, max=0; box.style.minHeight='';
   BIZ.forEach(function(b){ k.textContent=L(b[2]); max=Math.max(max,h.offsetHeight); });
-  k.textContent=cur; h.style.minHeight=max+'px';
+  k.textContent=cur; box.style.minHeight=max+'px';
 }
 var h1q=0; addEventListener('resize',function(){ if(!h1q) h1q=requestAnimationFrame(function(){ h1q=0; holdH1(); }); });
 if(document.fonts&&document.fonts.ready) document.fonts.ready.then(holdH1);
@@ -1480,20 +1467,15 @@ function renderShowcase(){
   fit();
 }
 
-/* ---- hero details: New Jersey clock, cursor position, dark header over the hero ---- */
+/* ---- dark header over the hero ---- */
 var fine=matchMedia('(hover:hover) and (pointer:fine)').matches, heroEl=$('#hero'), heroOn=false;
-function tick(){
-  if(!heroOn) return;
-  try{ $('#njTime').textContent=new Intl.DateTimeFormat('en-GB',{timeZone:'America/New_York',hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:false}).format(new Date()); }catch(e){}
-}
-setInterval(tick,1000);
 if('IntersectionObserver' in window){
   new IntersectionObserver(function(es){
-    heroOn=es[0].isIntersecting; tick();
+    heroOn=es[0].isIntersecting;
     $('header.top').classList.toggle('ondark',heroOn);
     if(heroOn) dotsWake();
   },{rootMargin:'-72px 0px 0px 0px'}).observe(heroEl);
-} else { heroOn=true; tick(); }
+} else { heroOn=true; }
 
 /* ---- hero dot grid: under the pointer the dots light up into a small website wireframe ---- */
 var cv=$('#dots'), cx=cv.getContext&&cv.getContext('2d'), DOT={gap:22,cols:0,rows:0,a:null,px:-1e4,py:-1e4,inside:false,raf:0,w:0,h:0};
@@ -1533,10 +1515,8 @@ function dotsWake(){ if(!DOT.raf) DOT.raf=requestAnimationFrame(dotsFrame); }
 if(cx){
   if(window.ResizeObserver) new ResizeObserver(function(){ DOT.w=0; dotsWake(); }).observe(heroEl);
   if(fine&&!reduce){
-    var xyq=0;
     heroEl.addEventListener('pointermove',function(e){
       var b=heroEl.getBoundingClientRect(); DOT.px=e.clientX-b.left; DOT.py=e.clientY-b.top; DOT.inside=true; dotsWake();
-      if(!xyq){ xyq=requestAnimationFrame(function(){ xyq=0; $('#xy').textContent='x '+('000'+Math.round(DOT.px)).slice(-4)+' · y '+('000'+Math.round(DOT.py)).slice(-4); }); }
     },{passive:true});
     heroEl.addEventListener('pointerleave',function(){ DOT.inside=false; dotsWake(); });
   }
