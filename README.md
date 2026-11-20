@@ -6,9 +6,20 @@ Es una copia exacta del artifact de Claude (versión `1795132498-e0b8`, 19 nov 2
 ## Estructura
 
 ```
-public/index.html   el sitio completo
-netlify.toml        configuración de Netlify (publica public/, sin build)
+public/index.html                    el sitio completo
+public/Digital-Accounting-Tax/       demo para el cliente Digital Accounting & Tax Inc.
+netlify.toml                         configuración de Netlify (publica public/, sin build)
 ```
+
+## Demo: Digital Accounting & Tax
+
+Sitio de muestra para presentar a Carlos Moran (Digital Accounting & Tax Inc.). Se abre en `/Digital-Accounting-Tax`.
+
+- `/Digital-Accounting-Tax/` envía a `es/` o `en/` según el idioma del navegador.
+- Páginas: `es/index.html`, `servicios`, `itin`, `nosotros`, `contacto`, `privacidad`, `cookies`, `terminos`, `accesibilidad`, y sus equivalentes en `en/`.
+- `/Digital-Accounting-Tax/telefono.html`: el sitio dentro de dos iPhones (español e inglés), con selector de paleta, para presentarlo.
+- No está enlazada desde la página principal y no se indexa en Google (`noindex` en cada página y `X-Robots-Tag` en `netlify.toml`). Cada página muestra una etiqueta "Demo de Skybridge Digital Studios".
+- Cuando el cliente apruebe, la versión de producción (con canonical, hreflang, sitemap y robots apuntando a digital.tax) se publica en su propio dominio, no aquí.
 
 ## Ver en local
 

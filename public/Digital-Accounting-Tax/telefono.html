@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Digital Accounting &amp; Tax en el teléfono</title>
+<style>
+:root{--bg:#E9EDF2;--ink:#0A1A2F;--muted:#4A576E;--line:#CDD5E0}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",sans-serif;font-size:16px;line-height:1.5}
+.top{max-width:1100px;margin:0 auto;padding:36px 20px 8px;display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:20px}
+h1{margin:0;font-family:Georgia,serif;font-weight:600;font-size:clamp(30px,4vw,46px);line-height:1.05;letter-spacing:-.02em}
+.top p{margin:8px 0 0;color:var(--muted);max-width:36em}
+.pals{display:flex;flex-wrap:wrap;gap:6px;max-width:440px}
+.pals button{display:flex;align-items:center;gap:8px;min-height:44px;padding:6px 12px 6px 6px;border-radius:999px;border:1.5px solid var(--line);background:#fff;color:var(--ink);font:inherit;font-size:14px;font-weight:600;cursor:pointer}
+.pals button[aria-pressed="true"]{border-color:var(--ink)}
+.pals i{display:block;width:26px;height:26px;border-radius:50%}
+:focus-visible{outline:3px solid #2D6CDF;outline-offset:3px}
+.stage{display:flex;flex-wrap:wrap;justify-content:center;gap:40px 56px;padding:28px 16px 64px}
+figure{margin:0;display:flex;flex-direction:column;align-items:center;gap:14px}
+.scale{width:calc(418px * var(--k,1));height:calc(872px * var(--k,1))}
+.phone{position:relative;width:418px;height:872px;padding:14px;border-radius:62px;background:#0D0F13;box-shadow:inset 0 0 0 2px #2a2e36,0 50px 80px -40px rgba(10,26,47,.55);transform:scale(var(--k,1));transform-origin:0 0}
+.screen{width:390px;height:844px;border-radius:48px;overflow:hidden;background:#000;padding-top:50px}
+.screen iframe{display:block;width:390px;height:794px;border:0;background:#fff}
+.island{position:absolute;left:50%;top:26px;width:118px;height:34px;margin-left:-59px;border-radius:20px;background:#0D0F13}
+figcaption{font-family:Georgia,serif;font-weight:600;font-size:20px}
+</style>
+</head>
+<body>
+<div class="top">
+  <div><h1>Así se ve en el teléfono</h1><p>El sitio real en un iPhone de 390 px, en español y en inglés. Puedes hacer scroll, abrir el menú, cambiar de página y de paleta.</p></div>
+  <div class="pals" role="group" aria-label="Paleta">
+    <button type="button" data-pal="tinta" aria-pressed="true"><i style="background:linear-gradient(135deg,#0A1A2F 50%,#4FD8A0 50%)"></i>Tinta</button>
+    <button type="button" data-pal="marino" aria-pressed="false"><i style="background:linear-gradient(135deg,#0E1C36 50%,#C9A24A 50%)"></i>Marino</button>
+    <button type="button" data-pal="grafito" aria-pressed="false"><i style="background:linear-gradient(135deg,#1B1E23 50%,#7DB3E8 50%)"></i>Grafito</button>
+    <button type="button" data-pal="bosque" aria-pressed="false"><i style="background:linear-gradient(135deg,#0F2A22 50%,#D4B26A 50%)"></i>Bosque</button>
+    <button type="button" data-pal="petroleo" aria-pressed="false"><i style="background:linear-gradient(135deg,#0D2B36 50%,#E39B6B 50%)"></i>Petróleo</button>
+    <button type="button" data-pal="cobalto" aria-pressed="false"><i style="background:linear-gradient(135deg,#0B1240 50%,#8AA6FF 50%)"></i>Cobalto</button>
+    <button type="button" data-pal="caribe" aria-pressed="false"><i style="background:linear-gradient(135deg,#05292B 50%,#FFB547 50%)"></i>Caribe</button>
+    <button type="button" data-pal="vino" aria-pressed="false"><i style="background:linear-gradient(135deg,#23101B 50%,#E9C46A 50%)"></i>Vino</button>
+  </div>
+</div>
+<div class="stage">
+  <figure><div class="scale"><div class="phone"><div class="screen"><iframe id="fes" src="es/index.html" title="Sitio en español"></iframe></div><div class="island" aria-hidden="true"></div></div></div><figcaption>Español</figcaption></figure>
+  <figure><div class="scale"><div class="phone"><div class="screen"><iframe id="fen" src="en/index.html" title="Site in English"></iframe></div><div class="island" aria-hidden="true"></div></div></div><figcaption>English</figcaption></figure>
+</div>
+<script>
+(function () {
+  function fit() { var k = Math.max(.55, Math.min(1, (innerHeight - 140) / 872, (innerWidth - 32) / 418)); document.querySelectorAll('.scale,.phone').forEach(function (e) { e.style.setProperty('--k', k.toFixed(3)); }); }
+  fit(); addEventListener('resize', fit);
+  var frames = [document.getElementById('fes'), document.getElementById('fen')], cur = 'tinta';
+  function send() { frames.forEach(function (f) { try { f.contentWindow.postMessage({ datPal: cur }, '*'); } catch (e) {} }); }
+  frames.forEach(function (f) { f.addEventListener('load', send); });
+  document.querySelectorAll('[data-pal]').forEach(function (b) {
+    b.addEventListener('click', function () {
+      cur = b.getAttribute('data-pal');
+      document.querySelectorAll('[data-pal]').forEach(function (x) { x.setAttribute('aria-pressed', String(x === b)); });
+      send();
+    });
+  });
+})();
+</script>
+</body>
+</html>

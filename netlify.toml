@@ -8,3 +8,9 @@
     X-Content-Type-Options = "nosniff"
     X-Frame-Options = "SAMEORIGIN"
     Referrer-Policy = "strict-origin-when-cross-origin"
+
+# Client demo for Digital Accounting & Tax: viewable by link, never indexed.
+[[headers]]
+  for = "/Digital-Accounting-Tax/*"
+  [headers.values]
+    X-Robots-Tag = "noindex, nofollow"
