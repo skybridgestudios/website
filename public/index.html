@@ -15,12 +15,18 @@
 <meta property="og:url" content="https://www.skybridgestd.space/">
 <meta property="og:locale" content="en_US">
 <meta property="og:locale:alternate" content="es_US">
-<meta name="twitter:card" content="summary">
+<meta property="og:image" content="https://www.skybridgestd.space/img/share.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Skybridge Digital Studios: websites that bring in customers, with a sample restaurant site on a laptop and a phone">
+<meta name="twitter:card" content="summary_large_image">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"ProfessionalService","name":"Skybridge Digital Studios","legalName":"Skybridge Digital Studios LLC","url":"https://www.skybridgestd.space/","email":"skybridgestudiosllc@gmail.com","description":"Websites, apps and simple AI automations for small businesses, in English and Spanish.","areaServed":{"@type":"Country","name":"United States"},"address":{"@type":"PostalAddress","addressRegion":"NJ","addressCountry":"US"},"knowsLanguage":["en","es"]}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
 <noscript><style>.view[data-view="home"]{display:block!important}.cta,.assure{display:flex}</style></noscript>
+<script>/* hero entrance: only when the visit starts on the home page; removed afterwards so it never replays on a page switch */
+(function(d){if(!/^#?(home)?$/.test(location.hash))return;d.classList.add('intro');setTimeout(function(){d.classList.remove('intro')},1200)})(document.documentElement)</script>
 <style>
 /* Direction: a calm, exact studio site. White and cool grey surfaces, deep navy ink, one confident blue.
    Hierarchy comes from type and spacing, not decoration. Left aligned on a 12-column feel.
@@ -31,7 +37,8 @@
   --accent:#26754a; --accent-ink:#1d5c3a; --field:#77827c; --on-accent:#ffffff; --soft:rgba(64,160,105,.13); --deep:#22302a;
   --display:"Schibsted Grotesk","Helvetica Neue",Arial,sans-serif; --body:"Schibsted Grotesk","Helvetica Neue",Arial,sans-serif;
   --dw:700; --track:-.03em;
-  --ease:cubic-bezier(.2,.8,.2,1);
+  /* motion: strong ease-out for entering and UI responses, ease-in-out for things that move on screen */
+  --ease-out:cubic-bezier(.23,1,.32,1); --ease-in-out:cubic-bezier(.77,0,.175,1); --ease:var(--ease-out);
   color-scheme:light;
 }
 
@@ -41,8 +48,8 @@ body{margin:0;background:var(--bg);color:var(--ink);font:400 17px/1.65 var(--bod
 img{max-width:100%;height:auto;display:block}
 a{color:inherit}
 :focus-visible{outline:3px solid var(--accent);outline-offset:3px;border-radius:6px}
-.skip{position:absolute;left:12px;top:-60px;z-index:100;padding:10px 16px;border-radius:8px;background:var(--ink);color:var(--bg);font-weight:600;text-decoration:none;transition:top .2s}
-.skip:focus{top:12px}
+.skip{position:absolute;left:12px;top:12px;z-index:100;padding:10px 16px;border-radius:8px;background:var(--ink);color:var(--bg);font-weight:600;text-decoration:none;transform:translateY(-72px);transition:transform .2s var(--ease-out)}
+.skip:focus{transform:none}
 main:focus{outline:none}
 [tabindex="-1"]:focus{outline:none}
 h1,h2,h3{font-family:var(--display);font-weight:var(--dw);letter-spacing:var(--track);line-height:1.08;margin:0;text-wrap:balance}
@@ -59,11 +66,13 @@ section{padding-block:clamp(64px,8vw,112px)}
 .shead .txt{display:grid;gap:14px;max-width:680px}
 
 /* buttons */
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;font:600 .98rem var(--body);padding:13px 22px;border-radius:8px;border:1px solid var(--line);background:var(--bg);color:var(--ink);text-decoration:none;cursor:pointer;transition:background .2s,border-color .2s,transform .2s}
-.btn:hover{border-color:var(--ink)}
-.btn:active{transform:translateY(1px)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;font:600 .98rem var(--body);padding:13px 22px;border-radius:8px;border:1px solid var(--line);background:var(--bg);color:var(--ink);text-decoration:none;cursor:pointer;transition:background-color .2s ease,border-color .2s ease,color .2s ease,transform .16s var(--ease-out)}
+.btn:active{transform:scale(.97)}
 .btn.primary{background:var(--accent);border-color:var(--accent);color:var(--on-accent)}
-.btn.primary:hover{background:color-mix(in srgb,var(--accent) 86%,#000)}
+@media (hover:hover) and (pointer:fine){
+  .btn:hover{border-color:var(--ink)}
+  .btn.primary:hover{background:color-mix(in srgb,var(--accent) 86%,#000)}
+}
 .btn.small{padding:9px 15px;font-size:.9rem}
 .link{color:var(--accent);font-weight:600;text-decoration:none;border-bottom:1px solid transparent}
 .link:hover{border-color:currentColor}
@@ -78,14 +87,19 @@ header.top{position:sticky;top:0;z-index:50;background:color-mix(in srgb,var(--b
 .logo{display:none}
 [data-logo="arco"] .lg-arco,[data-logo="mono"] .lg-mono,[data-logo="horizonte"] .lg-horizonte{display:block}
 .tabs{position:relative;display:flex;gap:4px;align-self:stretch;flex:1;min-width:0}
-.tabs a{display:flex;align-items:center;padding:0 12px;text-decoration:none;font-size:.94rem;font-weight:500;color:var(--muted);white-space:nowrap;transition:color .2s}
-.tabs a:hover{color:var(--ink)}
+.tabs a{display:flex;align-items:center;padding:0 12px;text-decoration:none;font-size:.94rem;font-weight:500;color:var(--muted);white-space:nowrap;transition:color .2s ease}
 .tabs a[aria-current="page"]{color:var(--ink);font-weight:600}
-.tabline{position:absolute;bottom:-1px;left:0;height:2px;width:0;background:var(--accent);transition:transform .45s var(--ease),width .45s var(--ease)}
+/* the underline slides to the new tab: width is set once per move, so scaleX would distort the 2px line; 220ms keeps it quick for a control used many times a visit */
+.tabline{position:absolute;bottom:-1px;left:0;height:2px;width:0;background:var(--accent);transition:transform .22s var(--ease-out),width .22s var(--ease-out)}
 .hright{display:flex;align-items:center;gap:10px;flex:none}
 .lang{display:inline-flex;border:1px solid var(--line);border-radius:8px;overflow:hidden}
-.lang button{font:600 .76rem var(--body);padding:7px 10px;border:0;background:transparent;color:var(--muted);cursor:pointer}
+.lang button{font:600 .76rem var(--body);padding:7px 10px;border:0;background:transparent;color:var(--muted);cursor:pointer;transition:background-color .2s ease,color .2s ease}
 .lang button[aria-pressed="true"]{background:var(--ink);color:var(--bg)}
+@media (hover:hover) and (pointer:fine){
+  .tabs a:hover,.lang button[aria-pressed="false"]:hover{color:var(--ink)}
+}
+/* a thumb-sized language switch on touch screens */
+@media (pointer:coarse){.lang button{min-height:44px;min-width:44px;padding-inline:12px}}
 @media (max-width:1060px){
   .hbar{flex-wrap:wrap;gap:0 16px;min-height:0;padding-top:12px}
   .hright{margin-left:auto}
@@ -99,14 +113,23 @@ header.top{position:sticky;top:0;z-index:50;background:color-mix(in srgb,var(--b
 /* views */
 .view{display:none}
 .view.on{display:block}
-.view.enter{animation:viewIn .5s var(--ease) both}
+/* page switch: a short fade, quick because people move between pages many times a visit
+   (browsers with View Transitions cross-fade the whole page instead, see the router) */
+.view.enter{animation:viewIn .18s var(--ease-out) both}
 @keyframes viewIn{from{opacity:.001}to{opacity:1}}
+::view-transition-old(root),::view-transition-new(root){animation-duration:.18s;animation-timing-function:var(--ease-out)}
 .phead{padding-block:clamp(56px,7vw,96px) clamp(36px,4vw,56px);border-bottom:1px solid var(--line)}
 .phead .wrap{display:grid;gap:18px}
 
 /* hero */
 .hero{padding-block:clamp(56px,7vw,96px) clamp(48px,6vw,84px)}
-.hgrid{display:grid;grid-template-columns:minmax(0,1.12fr) minmax(0,.95fr);gap:clamp(32px,5vw,72px);align-items:center}
+.hgrid{display:grid;grid-template-columns:minmax(0,1.12fr) minmax(0,.95fr);gap:clamp(32px,5vw,72px);align-items:start}
+/* the hero enters once, on the first load of the home page (html.intro is set in <head>); never on later page switches */
+@keyframes heroIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+@keyframes heroVisual{from{opacity:0;transform:translateY(12px) scale(.98)}to{opacity:1;transform:none}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+html.intro .hero [data-in]{animation:heroIn .5s var(--ease-out) both;animation-delay:var(--d,0ms)}
+html.intro .hero .devices[data-in]{animation-name:heroVisual}
 .hgrid h1{max-width:20ch}
 .hgrid .lead{margin-top:22px;max-width:46ch}
 .cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:32px}
@@ -120,7 +143,7 @@ header.top{position:sticky;top:0;z-index:50;background:color-mix(in srgb,var(--b
 .phone .scr{width:100%;height:100%;border-radius:22px;overflow:hidden;background:#fbf3e6;display:flex;flex-direction:column;font-family:Georgia,serif;color:#3d1a10}
 .phone .scr .h{display:flex;justify-content:space-between;align-items:center;padding:9cqi 8.6cqi 6cqi;font:italic 700 10cqi Georgia,serif}
 .phone .scr .h i{width:12.5cqi;height:2px;background:#3d1a10;box-shadow:0 4cqi 0 #3d1a10}
-.phone .scr .im{margin:0 7cqi;border-radius:7cqi;aspect-ratio:4/3;flex:none;background:radial-gradient(circle at 40% 60%,#f6b24a 0 9%,#d9622b 22%,#7a2e1d 48%,#2b120b 80%)}
+.phone .scr .im{position:relative;overflow:hidden;margin:0 7cqi;border-radius:7cqi;aspect-ratio:4/3;flex:none;background:radial-gradient(circle at 40% 60%,#f6b24a 0 9%,#d9622b 22%,#7a2e1d 48%,#2b120b 80%)}
 .phone .scr b{display:block;font:700 11.5cqi/1.1 Georgia,serif;margin:7.5cqi 8.6cqi 3cqi}
 .phone .scr .it{display:flex;justify-content:space-between;gap:4cqi;margin:0 8.6cqi;padding:4.5cqi 0;border-bottom:1px solid #ead9c0;font:8.4cqi Arial,sans-serif;white-space:nowrap}
 .phone .scr .bt{margin:auto 8.6cqi 10cqi;background:#7a2e1d;color:#fbf3e6;text-align:center;border-radius:999px;padding:6cqi;font:700 8.4cqi Arial,sans-serif}
@@ -134,7 +157,15 @@ header.top{position:sticky;top:0;z-index:50;background:color-mix(in srgb,var(--b
 
 /* services rows */
 .rows{border-top:1px solid var(--line)}
-.srow{display:grid;grid-template-columns:44px minmax(0,1fr) minmax(0,1.3fr) auto;gap:clamp(14px,3vw,36px);align-items:start;padding:28px 0;border-bottom:1px solid var(--line);text-decoration:none;transition:background .2s}
+.rows{isolation:isolate}
+.srow{position:relative;display:grid;grid-template-columns:44px minmax(0,1fr) minmax(0,1.3fr) auto;gap:clamp(14px,3vw,36px);align-items:start;padding:28px 0;border-bottom:1px solid var(--line);text-decoration:none}
+/* the whole row is one link: a soft tint just past its edges and a nudged arrow say so on hover */
+.srow::before{content:"";position:absolute;inset:0 -14px;z-index:-1;border-radius:12px;background:var(--soft);opacity:0;transition:opacity .2s ease}
+.srow .link::after{content:"→";display:inline-block;margin-left:6px;transition:transform .2s var(--ease-out)}
+@media (hover:hover) and (pointer:fine){
+  .srow:hover::before{opacity:.55}
+  .srow:hover .link::after{transform:translateX(3px)}
+}
 .srow .ic{width:44px;height:44px;border-radius:10px;background:var(--soft);color:var(--accent);display:grid;place-items:center}
 .srow .ic svg{width:22px;height:22px}
 .srow h3{padding-top:9px}
@@ -171,8 +202,11 @@ header.top{position:sticky;top:0;z-index:50;background:color-mix(in srgb,var(--b
 .teaser figcaption b{color:var(--ink);font-weight:600;margin-right:6px}
 .tpls{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:40px 26px}
 .tpl{all:unset;cursor:pointer;display:grid;gap:12px;align-content:start}
-.tpl .frame{transition:transform .35s var(--ease),box-shadow .35s}
-.tpl:hover .frame{transform:translateY(-4px);box-shadow:0 30px 50px -30px rgba(22,34,28,.55)}
+.tpl .frame{transition:transform .25s var(--ease-out),box-shadow .25s ease}
+@media (hover:hover) and (pointer:fine){
+  .tpl:hover .frame{transform:translateY(-3px);box-shadow:0 30px 50px -30px rgba(22,34,28,.55)}
+}
+.tpl:active .frame{transform:scale(.985)}
 .tpl:focus-visible{outline:3px solid var(--accent);outline-offset:6px;border-radius:10px}
 .tpl .row1{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
 .tpl .tname{font:var(--dw) 1.15rem/1.25 var(--display);letter-spacing:-.015em}
@@ -187,7 +221,11 @@ header.top{position:sticky;top:0;z-index:50;background:color-mix(in srgb,var(--b
 .faq{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:clamp(24px,5vw,70px)}
 details.q{border-bottom:1px solid var(--line);padding:20px 0}
 details.q:first-child{border-top:1px solid var(--line)}
-details.q summary{cursor:pointer;font-weight:600;font-size:1.05rem;list-style:none;display:flex;justify-content:space-between;gap:16px}
+details.q summary{cursor:pointer;font-weight:600;font-size:1.05rem;list-style:none;display:flex;justify-content:space-between;gap:16px;min-height:44px;align-items:flex-start}
+/* answers open with a short height + fade where the browser supports animating to auto height (others open instantly, as before) */
+details.q{interpolate-size:allow-keywords}
+details.q::details-content{height:0;opacity:0;overflow:clip;transition:height .25s var(--ease-out),opacity .2s ease,content-visibility .25s allow-discrete}
+details.q[open]::details-content{height:auto;opacity:1}
 details.q summary::-webkit-details-marker{display:none}
 details.q summary::after{content:"";flex:none;width:10px;height:10px;margin-top:7px;border-right:2px solid var(--muted);border-bottom:2px solid var(--muted);transform:rotate(45deg);transition:transform .3s var(--ease)}
 details.q[open] summary::after{transform:rotate(-135deg)}
@@ -199,6 +237,10 @@ details.q p{margin-top:12px;color:var(--muted)}
 .band p{color:rgba(255,255,255,.75);margin-top:12px}
 .band .btn{border-color:rgba(255,255,255,.3);background:transparent;color:#fff}
 .band .btn.primary{background:#fff;border-color:#fff;color:var(--deep)}
+@media (hover:hover) and (pointer:fine){
+  .band .btn:not(.primary):hover{border-color:rgba(255,255,255,.75)}
+  .band .btn.primary:hover{background:#e6ece9;border-color:#e6ece9}
+}
 .band .acts{display:flex;gap:12px;flex-wrap:wrap}
 
 /* services page */
@@ -235,7 +277,7 @@ details.q p{margin-top:12px;color:var(--muted)}
 .quote{display:grid;grid-template-columns:minmax(0,.7fr) minmax(0,1.3fr);gap:clamp(24px,5vw,64px);align-items:start}
 .qside{display:grid;gap:14px}
 .qside .box{border:1px solid var(--line);border-radius:12px;padding:22px;display:grid;gap:6px;background:var(--bg)}
-form{display:grid;gap:18px;border:1px solid var(--line);border-radius:12px;padding:clamp(20px,3vw,34px);background:var(--bg)}
+form{--fgap:18px;display:grid;gap:var(--fgap);border:1px solid var(--line);border-radius:12px;padding:clamp(20px,3vw,34px);background:var(--bg)}
 .row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
 label{display:grid;gap:6px;font-size:.88rem;font-weight:600}
 input[type=text],input[type=email],input[type=tel],select,textarea{font:inherit;font-size:.98rem;color:var(--ink);background:var(--bg);border:1px solid var(--field);border-radius:8px;padding:11px 12px;width:100%;transition:border-color .2s,box-shadow .2s}
@@ -251,8 +293,16 @@ legend{font-size:.88rem;font-weight:600;padding:0;margin-bottom:8px}
 .checks label:has(input:checked){border-color:var(--accent);background:var(--soft)}
 .checks input{accent-color:var(--accent)}
 .err{color:#c62f22;font-size:.9rem;font-weight:600;min-height:1.2em}
+/* an empty error line takes no room (it stays in the layout so screen readers still hear the alert when it fills) */
+.err:empty{min-height:0;margin-top:calc(-1 * var(--fgap,18px))}
 .result{display:none;gap:14px;border:2px solid var(--accent);border-radius:12px;padding:24px;background:var(--bg)}
-.result.show{display:grid}
+/* the result panel rises in once the request is handled; a drawn check mark when it was really sent */
+.result.show{display:grid;transition:opacity .3s var(--ease-out),transform .3s var(--ease-out)}
+@starting-style{.result.show{opacity:0;transform:translateY(8px)}}
+.result .ok{display:none;width:40px;height:40px;color:var(--accent)}
+.result.sent .ok{display:block}
+.result.sent .ok path{stroke-dasharray:24;stroke-dashoffset:24;animation:draw .4s .15s var(--ease-out) forwards}
+@keyframes draw{to{stroke-dashoffset:0}}
 .result pre{margin:0;white-space:pre-wrap;font:400 .86rem/1.55 ui-monospace,Menlo,Consolas,monospace;background:var(--bg2);border-radius:8px;padding:14px;max-height:260px;overflow:auto}
 .result .acts{display:flex;gap:10px;flex-wrap:wrap}
 .addr{font-weight:600;word-break:break-all;color:var(--accent-ink);text-underline-offset:3px}
@@ -271,14 +321,30 @@ footer h2{margin:0 0 10px;font:600 .9rem var(--body);letter-spacing:0;color:var(
 footer ul{margin:0;padding:0;display:grid;gap:6px}
 footer li{list-style:none}
 footer a,footer li button{all:unset;cursor:pointer;color:var(--muted)}
-footer a:hover,footer li button:hover{color:var(--ink);text-decoration:underline}
+@media (hover:hover) and (pointer:fine){footer a:hover,footer li button:hover{color:var(--ink);text-decoration:underline}}
+/* thumb-sized footer links on touch screens */
+@media (pointer:coarse){footer ul{gap:0}footer li a,footer li button{display:inline-flex;align-items:center;min-height:44px}}
 .copy{grid-column:1/-1;max-width:none;border-top:1px solid var(--line);padding-top:18px;font-size:.84rem}
+.copy.credits{border-top:0;padding-top:0;margin-top:-12px;font-size:.78rem}
+.copy.credits a{text-decoration:underline;text-underline-offset:2px}
 
 /* dialogs */
 dialog{border:1px solid var(--line);padding:0;border-radius:14px;width:min(1000px,calc(100% - 24px));max-height:calc(100% - 32px);color:var(--ink);background:var(--bg);box-shadow:0 40px 90px -30px rgba(0,0,0,.45)}
-dialog[open]{animation:dlg .3s var(--ease)}
-dialog::backdrop{background:rgba(10,16,30,.45)}
-@keyframes dlg{from{opacity:.001;transform:translateY(12px)}to{opacity:1;transform:none}}
+/* dialogs open and close with transitions (interruptible, with an exit); closing is quicker than opening.
+   .vt switches them off while a View Transition morphs a template card into the dialog. */
+dialog{transition:opacity .16s ease,transform .16s var(--ease-out),overlay .16s allow-discrete,display .16s allow-discrete}
+dialog[open]{transition-duration:.24s}
+dialog:not([open]){opacity:0;transform:translateY(8px) scale(.98)}
+@starting-style{dialog[open]:not(.vt){opacity:0;transform:translateY(8px) scale(.98)}}
+dialog::backdrop{background:rgba(10,16,30,.45);transition:opacity .2s ease,overlay .2s allow-discrete,display .2s allow-discrete}
+dialog:not([open])::backdrop{opacity:0}
+@starting-style{dialog[open]:not(.vt)::backdrop{opacity:0}}
+dialog.vt,dialog.vt::backdrop{transition:none}
+/* card <-> dialog morph: both snapshots show the same 1200px page scaled to width, so only the larger one is drawn
+   (no double image), scaled to the box's width, top-aligned and clipped by the moving box */
+::view-transition-group(tpl){animation-duration:.38s;animation-timing-function:var(--ease-in-out);overflow:clip;border-radius:10px}
+::view-transition-old(tpl),::view-transition-new(tpl){animation:none;height:auto}
+html.vt-open::view-transition-old(tpl),html.vt-close::view-transition-new(tpl){display:none}
 .mhead{position:sticky;top:0;z-index:2;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;padding:14px 18px;background:var(--bg);border-bottom:1px solid var(--line)}
 .mhead div{display:flex;gap:8px;flex-wrap:wrap}
 .mbody{padding:18px}
@@ -293,17 +359,20 @@ dialog::backdrop{background:rgba(10,16,30,.45)}
 .legal ul{padding-left:20px;margin:8px 0}
 /* frosted surfaces + hero glass stage */
 :root{--glass:color-mix(in srgb,var(--bg) 62%,transparent);--hi:rgba(255,255,255,.75);--edge:color-mix(in srgb,var(--ink) 10%,transparent)}
-body{background:radial-gradient(900px 620px at 92% -6%,color-mix(in srgb,var(--accent) 8%,transparent),transparent 70%),radial-gradient(760px 560px at -8% 38%,color-mix(in srgb,var(--accent) 5%,transparent),transparent 70%),var(--bg);background-attachment:fixed}
+/* the soft green glow stays put while the page scrolls: a fixed layer, not background-attachment:fixed, which repaints the whole page on every scroll */
+body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;background:radial-gradient(900px 620px at 92% -6%,color-mix(in srgb,var(--accent) 8%,transparent),transparent 70%),radial-gradient(760px 560px at -8% 38%,color-mix(in srgb,var(--accent) 5%,transparent),transparent 70%)}
 ::selection{background:#cdebd8;color:var(--ink)}
 .alt{background:radial-gradient(820px 440px at 92% 0%,color-mix(in srgb,var(--accent) 7%,transparent),transparent 70%),var(--bg2)}
 header.top{background:color-mix(in srgb,var(--bg) 68%,transparent);-webkit-backdrop-filter:blur(20px) saturate(170%);backdrop-filter:blur(20px) saturate(170%);border-bottom-color:var(--edge)}
 .wcard,.qside .box,form{background:var(--glass);-webkit-backdrop-filter:blur(18px) saturate(160%);backdrop-filter:blur(18px) saturate(160%);border-color:var(--edge);box-shadow:inset 0 1px 0 var(--hi),0 22px 44px -30px rgba(22,34,28,.4)}
 .btn:not(.primary){background:var(--glass);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);border-color:var(--edge)}
-.band .btn:not(.primary){background:transparent}
+/* on the dark band the glass rule above would hide the outline button's border */
+.band .btn:not(.primary){background:transparent;border-color:rgba(255,255,255,.3)}
 dialog{background:color-mix(in srgb,var(--bg) 90%,transparent);-webkit-backdrop-filter:blur(24px);backdrop-filter:blur(24px)}
 .mhead{background:transparent}
-@media (prefers-reduced-motion:no-preference){
-  .zoom{transition:transform .2s linear;transform:scale(var(--z,1))}
+/* on wide screens the short column beside a long one stays in view while the long one scrolls */
+@media (min-width:961px) and (min-height:640px){
+  #services-web,.faq>h2,.qside{position:sticky;top:110px;align-self:start}
 }
 @media (max-width:960px){
   .hgrid,.case,.work,.about,.quote,.svcgrid,.faq{grid-template-columns:1fr}
@@ -323,14 +392,30 @@ dialog{background:color-mix(in srgb,var(--bg) 90%,transparent);-webkit-backdrop-
   .devices .frame{display:none}
   .phone{position:relative;width:min(250px,66%);margin-inline:auto}
   .sbox{grid-template-columns:1fr}.sbox .mini{display:none}
+  /* one column on a phone: the hero's two actions stack at full width */
+  .cta{display:grid}
+  .cta .btn{width:100%}
 }
-@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
+/* reduced motion: nothing moves or scales; fades and colour changes stay, a little shorter */
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  html.intro .hero [data-in],html.intro .hero .devices[data-in]{animation-name:fadeIn;animation-duration:.2s;animation-delay:0s}
+  .btn:active,.tpl:active .frame{transform:none}
+  .skip,.tabline,.srow .link::after,.tpl .frame{transition:none}
+  .tpl:hover .frame,.srow:hover .link::after{transform:none}
+  dialog:not([open]),.result.show{transform:none}
+  @starting-style{dialog[open]:not(.vt){transform:none}.result.show{transform:none}}
+  .result.sent .ok path{animation:none;stroke-dashoffset:0}
+  details.q::details-content,details.q summary::after{transition:none}
+  ::view-transition-old(root),::view-transition-new(root){animation-duration:.12s}
+}
 
 /* ===== mini template pages (fixed 1200px wide, scaled down) ===== */
 .pg{font-family:Arial,Helvetica,sans-serif;color:#222;line-height:1.4}
 .pg *{box-sizing:border-box}
 .ph{border-radius:10px;position:relative;overflow:hidden}
-.ph::after{content:"your photo";position:absolute;right:12px;bottom:10px;font:600 13px Arial;color:rgba(255,255,255,.75);letter-spacing:.04em}
+/* sample photos fill their slot; the old gradient stays underneath while a photo loads */
+.ph img,.phone .scr .im img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 /* Mesa */
 .t-mesa{background:#fbf3e6;height:1000px}
 .t-mesa .nav{display:flex;justify-content:space-between;align-items:center;padding:26px 60px;font-size:17px;color:#5b2a1c}
@@ -467,21 +552,21 @@ dialog{background:color-mix(in srgb,var(--bg) 90%,transparent);-webkit-backdrop-
   <div class="hero">
     <div class="wrap hgrid">
       <div>
-        <h1 data-i18n="h1">Websites that bring in customers, built and looked after for you.</h1>
-        <p class="lead" data-i18n="h2">Websites, apps and simple automations for small businesses across the US, in English and Spanish. You talk to the people building it, and you get a written price before anything starts.</p>
-        <div class="cta">
+        <h1 data-in data-i18n="h1">Websites that bring in customers, built and looked after for you.</h1>
+        <p class="lead" data-in style="--d:70ms" data-i18n="h2">Websites, apps and simple automations for small businesses across the US, in English and Spanish. You talk to the people building it, and you get a written price before anything starts.</p>
+        <div class="cta" data-in style="--d:130ms">
           <a class="btn primary" href="#contact" data-i18n="h4">Get a free quote</a>
           <a class="btn" href="#templates" data-i18n="h3">Browse templates</a>
         </div>
-        <div class="assure">
+        <div class="assure" data-in style="--d:180ms">
           <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6M8 13h8M8 17h5"/></svg><span data-i18n="as1">Written, itemized quotes</span></span>
           <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 5h9M8.5 3v2M6 5c1 4 4 7 7 8M11 5c-1 4-4 7-7 8"/><path d="M13 21l4-10 4 10M14.5 17.5h5"/></svg><span data-i18n="as2">English and Spanish</span></span>
           <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3.5 3 14.5 0 18M12 3c-3 3.5-3 14.5 0 18"/></svg><span data-i18n="as3">Remote, anywhere in the US</span></span>
         </div>
       </div>
-      <div class="devices" role="img" aria-label="A sample restaurant website on a laptop and a phone" data-i18n-label="lb4">
-        <div class="frame zoom" id="heroFrame"></div>
-        <div class="phone" aria-hidden="true"><div class="scr"><div class="h">Mesa <i></i></div><div class="im"></div><b data-i18n="mk1">Wood-fired, every night.</b><div class="it"><span>Margherita</span><span>$16</span></div><div class="it"><span data-i18n="mk2">Spicy honey</span><span>$19</span></div><div class="it"><span data-i18n="mk3">Burrata salad</span><span>$14</span></div><div class="bt" data-i18n="mk4">Order online</div></div></div>
+      <div class="devices" data-in style="--d:120ms" role="img" aria-label="A sample restaurant website on a laptop and a phone" data-i18n-label="lb4">
+        <div class="frame" id="heroFrame"></div>
+        <div class="phone" aria-hidden="true"><div class="scr"><div class="h">Mesa <i></i></div><div class="im"><img src="img/tpl/mesa-hero.webp" alt="" width="800" height="640" decoding="async"></div><b data-i18n="mk1">Wood-fired, every night.</b><div class="it"><span>Margherita</span><span>$16</span></div><div class="it"><span data-i18n="mk2">Spicy honey</span><span>$19</span></div><div class="it"><span data-i18n="mk3">Burrata salad</span><span>$14</span></div><div class="bt" data-i18n="mk4">Order online</div></div></div>
       </div>
     </div>
   </div>
@@ -513,7 +598,7 @@ dialog{background:color-mix(in srgb,var(--bg) 90%,transparent);-webkit-backdrop-
 
   <section class="alt">
     <div class="wrap case">
-      <div class="sbox zoom">
+      <div class="sbox">
         <img class="lock" src="img/stylo-lockup.webp" alt="Stylo logo" width="560" height="190" loading="lazy" decoding="async">
         <div class="mini" aria-hidden="true"><div><b>Your closet</b><span style="background:#e2d7c6"></span><span style="background:#b9c3cc"></span><span style="background:#2f3440"></span><span style="background:#e9c8a6"></span><em></em></div></div>
       </div>
@@ -691,6 +776,7 @@ dialog{background:color-mix(in srgb,var(--bg) 90%,transparent);-webkit-backdrop-
           <button class="btn primary" type="submit" style="justify-self:start" id="q-btn" data-i18n="l11">Send my request</button>
         </form>
         <div class="result" id="q-res" aria-live="polite">
+          <svg class="ok" viewBox="0 0 40 40" fill="none" aria-hidden="true"><circle cx="20" cy="20" r="19" fill="var(--soft)"/><path d="M12.5 20.5l5 5 10-11" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
           <h2 id="q-rt" tabindex="-1"></h2>
           <p class="muted" id="q-rp"></p>
           <pre id="q-out"></pre>
@@ -719,6 +805,7 @@ dialog{background:color-mix(in srgb,var(--bg) 90%,transparent);-webkit-backdrop-
     <div><h2 data-i18n="ft2">Studio</h2><ul><li><a href="#services" data-i18n="n7">Services</a></li><li><a href="#work" data-i18n="n1">Work</a></li><li><a href="#templates" data-i18n="n2">Templates</a></li><li><a href="#about" data-i18n="n8">About</a></li><li><a href="#contact" data-i18n="n10">Contact</a></li></ul></div>
     <div><h2 data-i18n="ft3">Legal</h2><ul><li><button type="button" data-legal="terms" data-i18n="z1">Terms</button></li><li><button type="button" data-legal="privacy" data-i18n="z2">Privacy</button></li><li><button type="button" data-legal="cookies" data-i18n="z3">Cookies</button></li><li><button type="button" data-legal="refunds" data-i18n="z4">Refunds</button></li><li><button type="button" data-legal="access" data-i18n="z5">Accessibility</button></li></ul></div>
     <p class="copy" data-i18n="ft4">© 2026 Skybridge Digital Studios LLC. All rights reserved. Stylo is a product of Skybridge Digital Studios LLC. Other product and company names mentioned on this site belong to their owners and are used only to describe compatibility; their use does not imply endorsement.</p>
+    <p class="copy credits"><span data-i18n="ft5">Sample photos in the templates (cropped), via Wikimedia Commons:</span> <a href="https://commons.wikimedia.org/wiki/File:Pizza_baking_in_Wood-fired_oven.jpg">Jared Tarbell</a> (CC BY 2.0), <a href="https://commons.wikimedia.org/wiki/File:Fade_Hair_Cut.jpg">Truth678</a> (CC BY-SA 4.0), <a href="https://commons.wikimedia.org/wiki/File:Barber_cutting_hair_with_comb._Back_view_of_man_in_barber_shop.jpg">Nenad Stojkovic</a> (CC BY 2.0), <a href="https://commons.wikimedia.org/wiki/File:Chinese_barber_chair.JPG">Sean.hoyland</a> (CC BY-SA 3.0), <a href="https://commons.wikimedia.org/wiki/File:MOHAI_-_J._N._Hooper%27s_Barber_Shop_-_A.jpg">Joe Mabel</a> (CC BY-SA 3.0), <a href="https://commons.wikimedia.org/wiki/File:Wooden_boards.jpg">nywriter21</a> (CC BY 2.0), <a href="https://commons.wikimedia.org/wiki/File:Outdoor_bar_features_wooden_deck_with_bean_bag_seating_and_lush_plants.jpg">Shixart1985</a> (CC BY 2.0), <a href="https://commons.wikimedia.org/wiki/File:Throwstack_comfy.jpg">Pele20</a> (CC BY-SA 4.0), <a href="https://commons.wikimedia.org/wiki/File:Candle_arrangement.JPG">WillieWax</a> (CC BY-SA 3.0), <a href="https://commons.wikimedia.org/wiki/File:Blanket_(AM_2007.16.1-2).jpg">Onehunga Woollen Mills</a> (CC BY 4.0), <a href="https://commons.wikimedia.org/wiki/File:Mug_(AM_10099-1).jpg">Royal Oak Pottery</a> (CC BY 4.0), <a href="https://commons.wikimedia.org/wiki/File:Chery_A1_-_service_shop_in_Ukraine_(7).jpg">ANT Berezhnyi</a> (CC BY 3.0), <a href="https://commons.wikimedia.org/wiki/File:Doll_Toy_Foil_Wrapped_Package_-_DPLA_-_22650c4d556e6a06c179b2547de37cc0_(page_1).jpg">gift</a> and <a href="https://commons.wikimedia.org/wiki/File:Interior_of_an_office_in_Paris_in_1985_62e0c1e21f1b292f0ec2531756d0febf.jpg">office</a> photos public domain.</p>
   </div>
 </footer>
 
@@ -760,6 +847,7 @@ ab1:'Sobre nosotros',
 ab3:'Registrada en New Jersey como Skybridge Digital Studios LLC',
 ab4:'Trabajamos a distancia con negocios de cualquier estado',
 ab5:'Todo lo que entregamos viene en inglés, español o ambos',
+ft5:'Fotos de muestra en las plantillas (recortadas), vía Wikimedia Commons:',
 n1:'Trabajos',
 n2:'Plantillas',
 n6:'Pedir cotización',
@@ -909,19 +997,22 @@ var SVCS=[['Website','Página web'],['Online store','Tienda en línea'],['Social
 var WHEN=[['As soon as possible','Lo antes posible'],['Within a month','En un mes'],['In 2 to 3 months','En 2 a 3 meses'],['Just looking for now','Por ahora solo estoy mirando']];
 
 /* ---- templates as real mini pages ---- */
+/* a photo slot in a sample page: licensed stand-in photographs, credited in the footer */
+var PD={'mesa-hero':[800,640],'counter-banner':[800,500],'ledger-hero':[800,880],'tune-hero':[800,600],'level-before':[520,390],'level-after':[520,390]};
+function P(n){ var d=PD[n]||[520,520]; return '<div class="ph"><img src="img/tpl/'+n+'.webp" alt="" width="'+d[0]+'" height="'+d[1]+'" loading="lazy" decoding="async"></div>'; }
 var TPL=[
  {id:'mesa',name:'Mesa',url:'mesakitchen.com',who:['Restaurants & cafés','Restaurantes y cafés'],d:['Menu, hours and online ordering right up front.','Menú, horario y pedidos en línea al frente.'],h:1000,
-  html:['<div class="t-mesa"><div class="nav"><b>Mesa</b><span>Menu&nbsp;&nbsp; Catering&nbsp;&nbsp; Visit us <em>Order online</em></span></div><div class="hero"><div><div class="mh">Wood-fired, every night.</div><p>Neighborhood kitchen on Main Street. Pizza, pasta and a short wine list. Walk-ins welcome until 9.</p><span class="b">See tonight\'s menu</span></div><div class="ph"></div></div><div class="menu"><div><span>Margherita</span><b>$16</b></div><div><span>Spicy honey</span><b>$19</b></div><div><span>Burrata salad</span><b>$14</b></div><div><span>Rigatoni vodka</span><b>$21</b></div><div><span>Tiramisu</span><b>$9</b></div><div><span>Kids pizza</span><b>$10</b></div></div></div>','<div class="t-mesa"><div class="nav"><b>Mesa</b><span>Menú&nbsp;&nbsp; Catering&nbsp;&nbsp; Visítanos <em>Pedir en línea</em></span></div><div class="hero"><div><div class="mh">Horno de leña, todas las noches.</div><p>Cocina de barrio en Main Street. Pizza, pasta y una carta corta de vinos. Sin reservación hasta las 9.</p><span class="b">Ver el menú de hoy</span></div><div class="ph"></div></div><div class="menu"><div><span>Margherita</span><b>$16</b></div><div><span>Miel picante</span><b>$19</b></div><div><span>Ensalada burrata</span><b>$14</b></div><div><span>Rigatoni vodka</span><b>$21</b></div><div><span>Tiramisú</span><b>$9</b></div><div><span>Pizza infantil</span><b>$10</b></div></div></div>']},
+  html:['<div class="t-mesa"><div class="nav"><b>Mesa</b><span>Menu&nbsp;&nbsp; Catering&nbsp;&nbsp; Visit us <em>Order online</em></span></div><div class="hero"><div><div class="mh">Wood-fired, every night.</div><p>Neighborhood kitchen on Main Street. Pizza, pasta and a short wine list. Walk-ins welcome until 9.</p><span class="b">See tonight\'s menu</span></div>'+P('mesa-hero')+'</div><div class="menu"><div><span>Margherita</span><b>$16</b></div><div><span>Spicy honey</span><b>$19</b></div><div><span>Burrata salad</span><b>$14</b></div><div><span>Rigatoni vodka</span><b>$21</b></div><div><span>Tiramisu</span><b>$9</b></div><div><span>Kids pizza</span><b>$10</b></div></div></div>','<div class="t-mesa"><div class="nav"><b>Mesa</b><span>Menú&nbsp;&nbsp; Catering&nbsp;&nbsp; Visítanos <em>Pedir en línea</em></span></div><div class="hero"><div><div class="mh">Horno de leña, todas las noches.</div><p>Cocina de barrio en Main Street. Pizza, pasta y una carta corta de vinos. Sin reservación hasta las 9.</p><span class="b">Ver el menú de hoy</span></div>'+P('mesa-hero')+'</div><div class="menu"><div><span>Margherita</span><b>$16</b></div><div><span>Miel picante</span><b>$19</b></div><div><span>Ensalada burrata</span><b>$14</b></div><div><span>Rigatoni vodka</span><b>$21</b></div><div><span>Tiramisú</span><b>$9</b></div><div><span>Pizza infantil</span><b>$10</b></div></div></div>']},
  {id:'fade',name:'Fade',url:'fadestudio.co',who:['Barbershops & salons','Barberías y salones'],d:['A booking button on every screen, prices and a wall of cuts.','Botón de reserva en cada pantalla, precios y galería de cortes.'],h:1000,
-  html:'<div class="t-fade"><div class="nav">FADE STUDIO <em>Book a chair</em></div><div class="mh">SHARP.<br><span>EVERY TIME.</span></div><div class="list"><div>Classic cut <b>$30</b></div><div>Skin fade <b>$35</b></div><div>Beard trim <b>$15</b></div><div>Kids cut <b>$22</b></div></div><div class="gal"><div class="ph"></div><div class="ph"></div><div class="ph"></div><div class="ph"></div></div></div>'},
+  html:'<div class="t-fade"><div class="nav">FADE STUDIO <em>Book a chair</em></div><div class="mh">SHARP.<br><span>EVERY TIME.</span></div><div class="list"><div>Classic cut <b>$30</b></div><div>Skin fade <b>$35</b></div><div>Beard trim <b>$15</b></div><div>Kids cut <b>$22</b></div></div><div class="gal">'+P('fade-1')+P('fade-2')+P('fade-3')+P('fade-4')+'</div></div>'},
  {id:'level',name:'Level',url:'levelbuilders.com',who:['Contractors & home services','Contratistas y servicios del hogar'],d:['Free estimate form, service area and before-and-after photos.','Formulario de estimado, zona de servicio y fotos de antes y después.'],h:1000,
-  html:'<div class="t-level"><div class="top"><b>Level Builders</b><span>Licensed &amp; insured · Free estimates</span><em>(856) 555-0142</em></div><div class="hero"><div><div class="mh">Decks, kitchens and basements, done right the first time.</div><p>Family-owned since 2009. Free estimates within 48 hours.</p><div class="ba"><div class="ph"></div><div class="ph"></div></div></div><form><b>Get a free estimate</b><i></i><i></i><i></i><i class="t"></i><em>Send request</em></form></div></div>'},
+  html:'<div class="t-level"><div class="top"><b>Level Builders</b><span>Licensed &amp; insured · Free estimates</span><em>(856) 555-0142</em></div><div class="hero"><div><div class="mh">Decks, kitchens and basements, done right the first time.</div><p>Family-owned since 2009. Free estimates within 48 hours.</p><div class="ba">'+P('level-before')+P('level-after')+'</div></div><form><b>Get a free estimate</b><i></i><i></i><i></i><i class="t"></i><em>Send request</em></form></div></div>'},
  {id:'counter',name:'Counter',url:'shopcounter.com',who:['Shops & retail','Tiendas y comercios'],d:['Product grid, cart and checkout, pickup or shipping.','Catálogo, carrito y pago, con recogida o envío.'],h:1000,
-  html:'<div class="t-counter"><div class="nav"><b>counter.</b><span>Shop&nbsp;&nbsp; New&nbsp;&nbsp; Gifts&nbsp;&nbsp; About</span><em>Cart 2</em></div><div class="ban"><div class="mh">New this week: handmade candles and fall throws.</div><div class="ph"></div></div><div class="grid"><div><div class="ph"></div><p>Cedar candle<b>$24</b></p></div><div><div class="ph"></div><p>Wool throw<b>$68</b></p></div><div><div class="ph"></div><p>Stoneware mug<b>$18</b></p></div><div><div class="ph"></div><p>Gift box<b>$45</b></p></div></div></div>'},
+  html:'<div class="t-counter"><div class="nav"><b>counter.</b><span>Shop&nbsp;&nbsp; New&nbsp;&nbsp; Gifts&nbsp;&nbsp; About</span><em>Cart 2</em></div><div class="ban"><div class="mh">New this week: handmade candles and fall throws.</div>'+P('counter-banner')+'</div><div class="grid"><div>'+P('counter-candle')+'<p>Cedar candle<b>$24</b></p></div><div>'+P('counter-throw')+'<p>Wool throw<b>$68</b></p></div><div>'+P('counter-mug')+'<p>Stoneware mug<b>$18</b></p></div><div>'+P('counter-giftbox')+'<p>Gift box<b>$45</b></p></div></div></div>'},
  {id:'ledger',name:'Northfield',url:'ledgerandco.com',who:['Law, accounting & insurance','Abogados, contadores y seguros'],d:['Calm and credible. Practice areas, team and consult booking.','Sobrio y confiable. Áreas de práctica, equipo y citas.'],h:1000,
-  html:'<div class="t-ledger"><div class="nav"><b>Northfield &amp; Co.</b><span>Services&nbsp;&nbsp;&nbsp; Team&nbsp;&nbsp;&nbsp; Insights&nbsp;&nbsp;&nbsp; Contact</span></div><div class="hero"><div><div class="mh">Clear advice, plainly given.</div><p>Tax and bookkeeping for small businesses and families. Se habla español.</p><em>Book a free consultation</em></div><div class="ph"></div></div><div class="areas"><div>Small business tax</div><div>Bookkeeping</div><div>Payroll</div></div></div>'},
+  html:'<div class="t-ledger"><div class="nav"><b>Northfield &amp; Co.</b><span>Services&nbsp;&nbsp;&nbsp; Team&nbsp;&nbsp;&nbsp; Insights&nbsp;&nbsp;&nbsp; Contact</span></div><div class="hero"><div><div class="mh">Clear advice, plainly given.</div><p>Tax and bookkeeping for small businesses and families. Se habla español.</p><em>Book a free consultation</em></div>'+P('ledger-hero')+'</div><div class="areas"><div>Small business tax</div><div>Bookkeeping</div><div>Payroll</div></div></div>'},
  {id:'tune',name:'Tune-Up',url:'tuneupauto.com',who:['Auto shops & detailing','Talleres y detailing'],d:['Services, appointment requests, hours and directions in one tap.','Servicios, citas, horario y dirección a un toque.'],h:1000,
-  html:'<div class="t-tune"><div class="nav"><b>TUNE-UP</b><span>Mon to Sat, 7am to 6pm</span></div><div class="hero"><div><div class="mh">Back on the road <span>today.</span></div><p>Oil changes, brakes, inspections and diagnostics. Most repairs same day.</p><em>Request an appointment</em></div><div class="ph"></div></div><div class="cards"><div>Oil change<small>from $49</small></div><div>Brakes<small>from $159</small></div><div>NJ inspection<small>prep</small></div><div>Detailing<small>from $120</small></div></div></div>'}
+  html:'<div class="t-tune"><div class="nav"><b>TUNE-UP</b><span>Mon to Sat, 7am to 6pm</span></div><div class="hero"><div><div class="mh">Back on the road <span>today.</span></div><p>Oil changes, brakes, inspections and diagnostics. Most repairs same day.</p><em>Request an appointment</em></div>'+P('tune-hero')+'</div><div class="cards"><div>Oil change<small>from $49</small></div><div>Brakes<small>from $159</small></div><div>NJ inspection<small>prep</small></div><div>Detailing<small>from $120</small></div></div></div>'}
 ];
 var picked=store.get('sb-tpl')||'';
 function H(t){return typeof t.html==='string'?t.html:L(t.html)}
@@ -937,23 +1028,46 @@ function renderTpls(){
 }
 
 
-/* modal */
-var dlg=$('#tplDlg'), cur=null;
+/* modal: the clicked template card grows into the dialog and shrinks back into its card on close
+   (a shared-element View Transition named "tpl"); browsers without View Transitions use the dialog's own fade */
+var dlg=$('#tplDlg'), dfr=dlg.querySelector('.frame'), cur=null;
+function cardFrame(){ var b=cur&&$('#tpls .tpl[data-tpl="'+cur.id+'"]'); return b&&b.offsetParent?b.querySelector('.frame'):null; }
+var mseq=0;
+function morph(from,to,change,dir){
+  if(!document.startViewTransition||!from||reduce){ change(); return; }
+  /* only the latest morph cleans up: a quick second open/close skips the first transition, whose finish must not strip the second's names */
+  var my=++mseq, done=function(){ if(my!==mseq) return; $$('[style*="view-transition-name"]').forEach(function(n){n.style.viewTransitionName=''}); dlg.classList.remove('vt'); root.classList.remove('vt-open','vt-close'); };
+  try{
+    $$('[style*="view-transition-name"]').forEach(function(n){n.style.viewTransitionName=''}); root.classList.remove('vt-open','vt-close');
+    from.style.viewTransitionName='tpl'; dlg.classList.add('vt'); root.classList.add('vt-'+dir);
+    var vt=document.startViewTransition(function(){ from.style.viewTransitionName=''; change(); var t=to(); if(t) t.style.viewTransitionName='tpl'; });
+    vt.ready.catch(function(){}); vt.finished.then(done,done);
+  }catch(e){ done(); change(); }
+}
 function openTpl(id){
   cur=TPL.filter(function(t){return t.id===id})[0]; if(!cur) return;
   $('#dlgT').textContent=cur.name+', '+L(cur.who); $('#dlgUrl').textContent=L(URLX);
   var v=$('#dlgView'); v.innerHTML='<div class="pg">'+H(cur)+'</div>'; v.style.setProperty('--h',cur.h+'px');
-  if(dlg.showModal){dlg.showModal()}else{dlg.setAttribute('open','')}
-  requestAnimationFrame(fit);
+  morph(cardFrame(),function(){return dfr},function(){
+    if(dlg.showModal){dlg.showModal()}else{dlg.setAttribute('open','')}
+    fit();
+  },'open');
+}
+function closeTpl(){
+  if(!dlg.open) return;
+  var to=cardFrame();
+  morph(to?dfr:null,function(){return to},function(){ dlg.close(); },'close');
 }
 $('#tpls').addEventListener('click',function(e){var b=e.target.closest('.tpl'); if(b) openTpl(b.dataset.tpl)});
 $('#dlgUse').addEventListener('click',function(){
   picked=cur.id; store.set('sb-tpl',picked); renderTpls();
   if(!$('#q-type').value) $('#q-type').value=L(cur.who);
-  dlg.close(); location.hash='contact';
+  /* close at once (no fade), so the page cross-fade to Contact never captures a half-faded dialog */
+  dlg.classList.add('vt'); dlg.close(); location.hash='contact';
+  requestAnimationFrame(function(){ dlg.classList.remove('vt'); });
 });
 $$('dialog').forEach(function(d){
-  d.addEventListener('click',function(e){ if(e.target===d||e.target.closest('[data-close]')) d.close(); });
+  d.addEventListener('click',function(e){ if(e.target===d||e.target.closest('[data-close]')){ if(d===dlg) closeTpl(); else d.close(); } });
 });
 $('#q-tpl').addEventListener('change',function(e){picked=e.target.value; store.set('sb-tpl',picked); renderTpls()});
 
@@ -981,6 +1095,7 @@ function showResult(sent,text,mailto){
   $('#q-rt').textContent=L(sent?TX.okT:TX.mT); $('#q-rp').textContent=L(sent?TX.okP:TX.mP);
   $('#q-out').textContent=text; $('#q-acts').style.display=sent?'none':'flex';
   if(mailto) $('#q-mail').href=mailto;
+  $('#q-res').classList.toggle('sent',sent); $('#q-res').classList.remove('show'); void $('#q-res').offsetWidth;
   $('#q-res').classList.add('show'); $('#q-res').scrollIntoView({block:'nearest',behavior:reduce?'auto':'smooth'}); $('#q-rt').focus({preventScroll:true});
 }
 function clearErrors(){ $('#q-err').textContent=''; ['q-name','q-email'].forEach(function(id){$('#'+id).removeAttribute('aria-invalid')}); }
@@ -1004,14 +1119,19 @@ $('#qf').addEventListener('submit',function(e){
   var body=rows.filter(function(r){return r[1]}).map(function(r){return L(r[0])+': '+r[1]}).join('\n');
   var subject=L(TX.subj)+' - '+(v('q-biz')||v('q-name'));
   var mailto='mailto:skybridgestudiosllc@gmail.com?subject='+encodeURIComponent(subject)+'&body='+encodeURIComponent(body);
-  var btn=$('#q-btn'), old=btn.innerHTML; btn.disabled=true; btn.setAttribute('aria-busy','true'); btn.textContent=L(TX.sending);
+  var btn=$('#q-btn'), old=btn.innerHTML; btn.disabled=true; btn.setAttribute('aria-busy','true'); relabel(btn,L(TX.sending));
   var data=new URLSearchParams(new FormData($('#qf')));
   if(t) data.set('template',t.name+' ('+L(t.who)+')');
   fetch('/',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:data.toString()})
     .then(function(r){ if(!r.ok) throw 0; showResult(true,subject+'\n\n'+body); $('#qf').reset(); renderOpts(); renderTpls(); })
     .catch(function(){ showResult(false,subject+'\n\n'+body,mailto); })
-    .then(function(){ btn.disabled=false; btn.removeAttribute('aria-busy'); btn.innerHTML=old; });
+    .then(function(){ btn.disabled=false; btn.removeAttribute('aria-busy'); relabel(btn,old,true); });
 });
+/* swap a button's label with a short blur cross-fade, so the change reads as one button changing state */
+function relabel(b,txt,html){
+  if(html) b.innerHTML=txt; else b.textContent=txt;
+  if(!reduce&&b.animate) b.animate([{filter:'blur(2px)',opacity:.6},{filter:'blur(0)',opacity:1}],{duration:200,easing:'ease'});
+}
 $('#q-copy').addEventListener('click',function(){
   var b=this, txt='To: skybridgestudiosllc@gmail.com\n'+$('#q-out').textContent;
   var back=function(m){b.textContent=m; setTimeout(function(){b.innerHTML=lang==='es'?ES.x2:EN.x2},1800)};
@@ -1113,34 +1233,34 @@ $('#ltabs').addEventListener('click',function(e){var b=e.target.closest('[data-l
 /* ---- router, motion ---- */
 var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
 var VIEWS=['home','services','work','templates','about','contact'], ALIAS={apps:'work',quote:'contact'}, booted=false;
-function show(v,target){
+function show(v,target,crossfaded){
   $$('.view').forEach(function(el){ el.classList.toggle('on',el.dataset.view===v); el.classList.remove('enter'); });
   var el=$('.view[data-view="'+v+'"]');
-  void el.offsetWidth; el.classList.add('enter');
+  if(!crossfaded){ void el.offsetWidth; el.classList.add('enter'); }
   $$('#tabs a').forEach(function(a){ if(a.getAttribute('href')==='#'+v) a.setAttribute('aria-current','page'); else a.removeAttribute('aria-current'); });
   var a=$('#tabs a[href="#'+v+'"]'); document.title=(v==='home'||!a?'Skybridge Digital Studios · '+L(['Websites, apps and AI for small businesses','Páginas web, apps e IA para pequeños negocios']):a.textContent+' · Skybridge Digital Studios');
   var t=target&&document.getElementById(target);
   if(t){ requestAnimationFrame(function(){ t.scrollIntoView({block:'start'}); }); } else window.scrollTo(0,0);
   /* after a click (not on first load) move focus to the new page's heading, so keyboard and screen reader users land on it */
   if(booted){ var h=t?t.querySelector('h2,h3'):el.querySelector('h1'); if(h){ h.setAttribute('tabindex','-1'); h.focus({preventScroll:true}); } }
-  requestAnimationFrame(function(){ fit(); movePills(); onScroll(); });
+  requestAnimationFrame(function(){ fit(); movePills(); });
 }
 function route(){
   var h=location.hash.replace('#',''), v=h.split('-')[0];
   if(ALIAS[v]) v=ALIAS[v];
-  show(VIEWS.indexOf(v)>-1?v:'home', h.indexOf('-')>-1?h:null);
+  v=VIEWS.indexOf(v)>-1?v:'home';
+  var target=h.indexOf('-')>-1?h:null, on=$('.view.on');
+  /* switching pages: a 180ms cross-fade of the whole page where View Transitions exist, else the CSS fade on the new page */
+  if(booted&&document.startViewTransition&&on&&on.dataset.view!==v){
+    try{ document.startViewTransition(function(){ show(v,target,true); }).ready.catch(function(){}); return; }catch(e){}
+  }
+  show(v,target);
 }
 addEventListener('hashchange',route);
 /* the skip link moves focus to the current page's heading without changing the page */
 $('.skip').addEventListener('click',function(e){ e.preventDefault(); var h=$('.view.on h1'); if(h){ h.setAttribute('tabindex','-1'); h.focus(); } });
 addEventListener('resize',movePills);
 
-function onScroll(){
-  if(reduce) return;
-  $$('.view.on .zoom').forEach(function(el){ var r=el.getBoundingClientRect(), c=(r.top+r.height/2)/innerHeight; el.style.setProperty('--z',(1.035-clamp(1-Math.abs(c-.5)*2,0,1)*.035).toFixed(4)); });
-}
-function clamp(v,a,b){return Math.max(a,Math.min(b,v))}
-var sq=false; addEventListener('scroll',function(){ if(!sq){ sq=true; requestAnimationFrame(function(){ sq=false; onScroll(); }); } },{passive:true});
 /* tab underline; on narrow screens the tab row scrolls, and fades at the edge while more tabs are hidden */
 function edge(){ var t=$('#tabs'); t.classList.toggle('more',t.scrollLeft+t.clientWidth<t.scrollWidth-4); }
 $('#tabs').addEventListener('scroll',edge,{passive:true});
