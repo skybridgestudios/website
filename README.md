@@ -9,6 +9,9 @@ Es una copia exacta del artifact de Claude (versión `1795132498-e0b8`, 19 nov 2
 
 ```
 public/index.html                          el sitio completo
+public/img/                                imágenes del sitio
+public/robots.txt, public/sitemap.xml      para buscadores
+notas/precios.js                           lista de precios sin publicar
 public/clientes/<slug>/                    demos privados de clientes (uno por carpeta)
 public/clientes/digital-accounting-tax/    demo para Digital Accounting & Tax Inc.
 netlify/edge-functions/acceso-clientes/    acceso privado a los demos (index.ts) y lista de clientes (clientes.ts)
@@ -48,9 +51,22 @@ Sitio de muestra para Carlos Moran (Digital Accounting & Tax Inc.), en `/cliente
 - Las imágenes `public/work/dat-*` siguen protegidas (`extraProtected`). Cuando Carlos apruebe por escrito mostrar el caso en "Work", quita esa línea y reemplaza la tarjeta de relleno.
 - Cuando el cliente apruebe, la versión de producción (con canonical, hreflang, sitemap y robots apuntando a digital.tax) se publica en su propio dominio, no aquí.
 
+## Formulario de cotización
+
+El formulario de Contacto se envía con **Netlify Forms** (formulario `quote`). Para recibir las solicitudes:
+
+1. En Netlify: **Forms → Enable form detection** y vuelve a publicar.
+2. **Forms → Form notifications → Add notification → Email notification**, con skybridgestudiosllc@gmail.com.
+
+Las solicitudes también quedan guardadas en **Forms** dentro de Netlify. Si el envío falla (o se abre el archivo en local), el formulario prepara un correo que el visitante envía por su cuenta, como antes, así que nunca se pierde lo que escribió.
+
 ## Aviso de Netlify
 
-El plan gratuito de Netlify añade abajo a la derecha una etiqueta "Powered by Netlify" (unos 202×64 px). En pantallas estrechas el aviso de cookies sube para no quedar debajo de ella (`.cnote` en `public/index.html`). Las portadas de clientes dejan espacio abajo por la misma razón.
+El plan gratuito de Netlify añade abajo a la derecha una etiqueta "Powered by Netlify" (unos 202×64 px). Ningún elemento fijo del sitio queda debajo de ella. El sitio no usa cookies, así que no muestra aviso de cookies; la política sigue en el pie de página.
+
+## Precios
+
+La lista de precios que estaba escondida en el código de la página se movió a `notas/precios.js` (no se publica). Así no aparece en el código fuente mientras la página dice que todavía no publicamos precios.
 
 ## Ver en local
 
@@ -78,6 +94,6 @@ git push -u origin main
 
 ## Pendiente antes de producción
 
-- **Formulario de cotización.** Hoy no envía nada: prepara un correo para que el visitante lo mande. Para activarlo, llenar `FORM_ENDPOINT` y `FORM_KEY` al inicio del `<script>` en `public/index.html` (está pensado para Web3Forms).
-- **Dependencias externas.** El sitio carga Google Fonts y three.js desde jsDelivr.
+- **Formulario de cotización.** Activar Netlify Forms y la notificación por correo (ver arriba).
+- **Dependencias externas.** El sitio solo carga Google Fonts (Schibsted Grotesk, 4 pesos). Ya no usa three.js.
 - Revisar los puntos de la auditoría del 16 nov (textos de "clientes en 50 estados", aviso de cookies, navegación en móvil, SEO).
