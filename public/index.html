@@ -170,8 +170,7 @@ html.intro .hero .devices[data-in]{animation-name:heroVisual}
 /* reserve the sample's height before the script fills it, so nothing below it jumps */
 #heroFrame:empty{aspect-ratio:1200/800}
 .dark .frame{border-color:rgba(255,255,255,.1);box-shadow:0 40px 90px -30px rgba(0,0,0,.85)}
-::view-transition-group(mock){animation-duration:.25s;animation-timing-function:var(--ease-out)}
-.devices.swap{animation:fadeIn .25s var(--ease-out)}
+.devices .ghost{position:absolute;inset:0;z-index:2;pointer-events:none}
 .phone{position:absolute;right:0;bottom:0;width:27%;min-width:120px;aspect-ratio:9/19;border-radius:28px;background:#0f1218;padding:7px;box-shadow:0 30px 60px -28px rgba(0,0,0,.8),0 0 0 1px rgba(255,255,255,.08);container-type:inline-size}
 /* the sample phone's contents scale with its width (cqi), so nothing clips at any size; colours and type come from the chosen template */
 .phone .scr{width:100%;height:100%;border-radius:22px;overflow:hidden;background:var(--pb,#fbf3e6);display:flex;flex-direction:column;font-family:Georgia,serif;color:var(--pi,#3d1a10)}
@@ -478,7 +477,6 @@ dialog{background:color-mix(in srgb,var(--bg) 90%,transparent);-webkit-backdrop-
   .btn:active,.tpl:active .frame{transform:none}
   .skip,.tabline,.bcard .link::after,.tpl .frame{transition:none}
   .tpl:hover .frame,.bcard:hover .link::after,.chip:active{transform:none}
-  .devices.swap{animation-duration:.15s}
   dialog:not([open]),.result.show{transform:none}
   @starting-style{dialog[open]:not(.vt){transform:none}.result.show{transform:none}}
   .result.sent .ok path{animation:none;stroke-dashoffset:0}
@@ -1371,7 +1369,7 @@ function show(v,target,crossfaded){
   if(t){ requestAnimationFrame(function(){ t.scrollIntoView({block:'start'}); }); } else window.scrollTo(0,0);
   /* after a click (not on first load) move focus to the new page's heading, so keyboard and screen reader users land on it */
   if(booted){ var h=t?t.querySelector('h2,h3'):el.querySelector('h1'); if(h){ h.setAttribute('tabindex','-1'); h.focus({preventScroll:true}); } }
-  requestAnimationFrame(function(){ fit(); movePills(); });
+  requestAnimationFrame(function(){ fit(); movePills(); if(v==='home') holdH1(); });
 }
 function route(){
   var h=location.hash.replace('#',''), v=h.split('-')[0];
@@ -1410,8 +1408,8 @@ var PH={
  fade:{c:['#121212','#ffffff','#2c2c2c','#d8ff3e','#121212'],f:['900 8.4cqi \'Arial Black\',Arial,sans-serif','900 12cqi/1 \'Arial Black\',Impact,Arial,sans-serif'],n:'FADE STUDIO',t:'SHARP. EVERY TIME.',it:[['Classic cut','$30'],['Skin fade','$35'],['Beard trim','$15']],b:'Book a chair'},
  level:{c:['#f4f5f1','#1f3d2b','#dfe3dc','#f6c21c','#1f3d2b'],f:['800 8.4cqi Arial,sans-serif','800 11cqi/1.1 Arial,sans-serif'],n:'Level Builders',t:'Decks, kitchens and basements.',it:[['Free estimates','48 h'],['Licensed & insured','NJ'],['Family-owned','2009']],b:'Get a free estimate'},
  counter:{c:['#ffffff','#1a1a1a','#eeeeee','#ff5b3a','#ffffff'],f:['800 10cqi Arial,sans-serif','800 11.5cqi/1.1 Arial,sans-serif'],n:'counter.',t:'New this week.',it:[['Cedar candle','$24'],['Wool throw','$68'],['Stoneware mug','$18']],b:'Shop now'},
- ledger:{c:['#f6f3ee','#1b2a41','#cfc7b8','#1b2a41','#f6f3ee'],f:['400 8.4cqi Georgia,serif','400 12cqi/1.1 Georgia,serif'],n:'Northfield &amp; Co.',t:'Clear advice, plainly given.',it:[['Small business tax',''],['Bookkeeping',''],['Payroll','']],b:'Book a consultation'},
- tune:{c:['#0f1720','#ffffff','#22303f','#ff3b30','#ffffff'],f:['italic 900 9cqi Arial,sans-serif','800 12cqi/1 Arial,sans-serif'],n:'TUNE-UP',t:'Back on the road today.',it:[['Oil change','$49'],['Brakes','$159'],['NJ inspection','prep']],b:'Request an appointment'}
+ ledger:{c:['#f6f3ee','#1b2a41','#cfc7b8','#1b2a41','#f6f3ee'],f:['400 8.4cqi Georgia,serif','400 12cqi/1.1 Georgia,serif'],n:'Northfield &amp; Co.',t:'Clear advice, plainly given.',it:[['Small business tax',''],['Bookkeeping',''],['Payroll','']],b:'Book a consult'},
+ tune:{c:['#0f1720','#ffffff','#22303f','#ff3b30','#ffffff'],f:['italic 900 9cqi Arial,sans-serif','800 12cqi/1 Arial,sans-serif'],n:'TUNE-UP',t:'Back on the road today.',it:[['Oil change','$49'],['Brakes','$159'],['NJ inspection','prep']],b:'Book a service'}
 };
 function tx(v){ return typeof v==='string'?v:L(v); }
 function phoneHTML(id){
@@ -1431,15 +1429,15 @@ function renderChips(){
   $('#chipset').innerHTML=BIZ.map(function(b){ return '<button type="button" class="chip" data-biz="'+b[0]+'" aria-pressed="'+(b[0]===heroT)+'">'+L(b[1])+'</button>'; }).join('');
   $('#kw').textContent=L(biz(heroT)[2]);
 }
-/* letters run through random glyphs before settling on the new word: once per change, never with reduced motion */
-var GLYPHS='ABCDEFGHIJKLMNOPQRSTUVWXYZ#%&/<>_*+';
+/* the new word decodes from left to right while the letters still to come shuffle within their own word:
+   every word keeps its width, so the line breaks (and the page) never move. Once per change, never with reduced motion */
+function shuffle(w){ var a=w.split(''); for(var i=a.length-1;i>0;i--){ var j=(Math.random()*(i+1))|0, t=a[i]; a[i]=a[j]; a[j]=t; } return a.join(''); }
 function scramble(el,txt,dur){
   if(el._scr) cancelAnimationFrame(el._scr);
   if(reduce){ el.textContent=txt; return; }
   var t0=performance.now(); dur=dur||320;
   (function step(now){
-    var k=Math.min(1,(now-t0)/dur), n=Math.floor(txt.length*k), out=txt.slice(0,n);
-    for(var i=n;i<txt.length;i++) out+=txt[i]===' '?' ':GLYPHS[(Math.random()*GLYPHS.length)|0].toLowerCase();
+    var k=Math.min(1,(now-t0)/dur), n=Math.floor(txt.length*k), out=txt.slice(0,n)+txt.slice(n).split(' ').map(shuffle).join(' ');
     el.textContent=out;
     if(k<1) el._scr=requestAnimationFrame(step); else { el.textContent=txt; el._scr=0; }
   })(t0);
@@ -1450,17 +1448,25 @@ function setHero(id){
   $$('#chipset .chip').forEach(function(c){ c.setAttribute('aria-pressed',c.dataset.biz===id); });
   scramble($('#kw'),L(b[2]));
   $('#mockSay').textContent=(lang==='es'?'Mostrando el ejemplo: ':'Showing the sample: ')+L(b[1]);
-  var dv=$('#devices');
-  if(document.startViewTransition&&!reduce){
-    try{
-      dv.style.viewTransitionName='mock';
-      var vt=document.startViewTransition(renderMock);
-      vt.ready.catch(function(){}); vt.finished.then(function(){ dv.style.viewTransitionName=''; },function(){ dv.style.viewTransitionName=''; });
-      return;
-    }catch(e){ dv.style.viewTransitionName=''; }
-  }
-  renderMock(); dv.classList.remove('swap'); void dv.offsetWidth; dv.classList.add('swap');
+  /* cross-fade only the sample: a copy of the old one fades out on top of the new one.
+     (A page-wide View Transition froze the whole page for the fade, so scrolling or the dot grid ghosted.) */
+  var dv=$('#devices'), prev=dv.querySelector('.ghost'); if(prev) prev.remove();
+  if(reduce||!dv.animate){ renderMock(); return; }
+  var g=document.createElement('div'); g.className='ghost'; g.setAttribute('aria-hidden','true');
+  g.appendChild($('#heroFrame').cloneNode(true)); g.appendChild(dv.querySelector('.phone').cloneNode(true));
+  Array.prototype.forEach.call(g.querySelectorAll('[id]'),function(n){ n.removeAttribute('id'); });
+  renderMock(); dv.appendChild(g);
+  g.animate([{opacity:1},{opacity:0}],{duration:240,easing:'cubic-bezier(.23,1,.32,1)',fill:'forwards'}).finished.then(function(){ g.remove(); },function(){});
 }
+/* the heading keeps the height of its longest keyword, so changing business (or the letters decoding) never moves the page */
+function holdH1(){
+  var h=$('.hero h1'), k=$('#kw'); if(!h||!h.offsetWidth||k._scr) return;
+  var cur=k.textContent, max=0; h.style.minHeight='';
+  BIZ.forEach(function(b){ k.textContent=L(b[2]); max=Math.max(max,h.offsetHeight); });
+  k.textContent=cur; h.style.minHeight=max+'px';
+}
+var h1q=0; addEventListener('resize',function(){ if(!h1q) h1q=requestAnimationFrame(function(){ h1q=0; holdH1(); }); });
+if(document.fonts&&document.fonts.ready) document.fonts.ready.then(holdH1);
 $('#chipset').addEventListener('click',function(e){ var c=e.target.closest('.chip'); if(c) setHero(c.dataset.biz); });
 /* the hero's quote button carries the chosen sample into the form */
 $('#heroGo').addEventListener('click',function(){
@@ -1468,7 +1474,7 @@ $('#heroGo').addEventListener('click',function(){
   if(!$('#q-type').value) $('#q-type').value=L(biz(heroT)[1]);
 });
 function renderShowcase(){
-  renderChips(); renderMock();
+  renderChips(); holdH1(); renderMock();
   $('#bwViz').innerHTML=frame(TPL[2]);
   $('#teaser').innerHTML=[0,1,2].map(function(i){var t=TPL[i]; return '<figure>'+frame(t)+'<figcaption><b>'+t.name+'</b>'+L(t.who)+'</figcaption></figure>'}).join('');
   fit();
