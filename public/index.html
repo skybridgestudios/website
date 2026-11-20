@@ -481,7 +481,6 @@ dialog{background:color-mix(in srgb,var(--bg) 90%,transparent);-webkit-backdrop-
       <a href="#services" data-i18n="n7">Services</a>
       <a href="#work" data-i18n="n1">Work</a>
       <a href="#templates" data-i18n="n2">Templates</a>
-      <a href="#pricing" data-i18n="n3">Pricing</a>
       <a href="#apps" data-i18n="n4">Apps</a>
       <a href="#about" data-i18n="n8">About</a>
       <a href="#contact" data-i18n="n10">Contact</a>
@@ -576,15 +575,14 @@ dialog{background:color-mix(in srgb,var(--bg) 90%,transparent);-webkit-backdrop-
 
   <section class="alt">
     <div class="wrap">
-      <div class="shead"><div class="txt"><h2 data-i18n="pt1">Clear prices</h2><p class="lead" data-i18n="pt2">Starting prices for our most requested projects. Every quote is written for your job.</p></div><a class="btn" href="#pricing" data-i18n="hm7">See pricing</a></div>
-      <div class="tease3" id="tease3"></div>
+      <div class="shead" style="margin:0"><div class="txt"><h2 data-i18n="pt1">We work by quote, for now</h2><p class="lead" data-i18n="pt2">Every business needs something different, so we don't publish fixed prices yet. Tell us what you need and we'll send a written, itemized quote. It's free and you're not committed to anything.</p></div><a class="btn primary" href="#contact" data-i18n="pt3">Ask for a quote</a></div>
     </div>
   </section>
 
   <section class="band">
     <div class="wrap">
       <div><h2 data-i18n="hm5">Have a project in mind?</h2><p data-i18n="hm6">Tell us what you need and we'll reply with questions or a written quote.</p></div>
-      <div class="acts"><a class="btn primary" href="#contact" data-i18n="n6">Get a quote</a><a class="btn" href="#pricing" data-i18n="hm7">See pricing</a></div>
+      <div class="acts"><a class="btn primary" href="#contact" data-i18n="n6">Get a quote</a><a class="btn" href="#services" data-i18n="hm7">See services</a></div>
     </div>
   </section>
 </div>
@@ -619,6 +617,20 @@ dialog{background:color-mix(in srgb,var(--bg) 90%,transparent);-webkit-backdrop-
         <li><b data-i18n="f8">We build, you review</b><span data-i18n="f8d">You see drafts along the way and ask for changes before anything goes public.</span></li>
         <li><b data-i18n="f9">Launch, then we stick around</b><span data-i18n="f9d">We put it live, show you how to update it, and fix things when you need us.</span></li>
       </ol>
+    </div>
+  </section>
+  <section>
+    <div class="wrap faq">
+      <h2 data-i18n="q0">Questions people ask us</h2>
+      <div>
+        <details class="q"><summary data-i18n="q7">How much does a website cost?</summary><p data-i18n="q7a">We quote each project after we know what you need. Send us a short request and we reply with a written, itemized quote, usually within two business days.</p></details>
+        <details class="q"><summary data-i18n="q1">Do I own the website?</summary><p data-i18n="q1a">Yes. The domain, the content and the design are yours. If you ever want to move on, we hand everything over.</p></details>
+        <details class="q"><summary data-i18n="q2">How long does it take?</summary><p data-i18n="q2a">A one-page site usually takes about two weeks once we have your photos and text. Bigger sites take three to six weeks.</p></details>
+        <details class="q"><summary data-i18n="q3">I don't have photos or text. Can you help?</summary><p data-i18n="q3a">Yes. We write copy in English and Spanish, and we can help you get photos that show your work well.</p></details>
+        <details class="q"><summary data-i18n="q4">Can you fix my current website instead?</summary><p data-i18n="q4a">Often, yes. Put the link in the quote form and we'll tell you honestly whether fixing it or starting fresh makes more sense.</p></details>
+        <details class="q"><summary data-i18n="q5">Do you work with businesses outside New Jersey?</summary><p data-i18n="q5a">Yes. We work remotely with clients in all 50 states, over video calls, email and shared drafts.</p></details>
+        <details class="q"><summary data-i18n="q6">How do payments work?</summary><p data-i18n="q6a">Projects start with a 50% deposit and the rest is due at launch. Ongoing services are billed monthly. We accept card, ACH bank transfer and Zelle, and we send an invoice for every payment.</p></details>
+      </div>
     </div>
   </section>
 </div>
@@ -658,43 +670,6 @@ dialog{background:color-mix(in srgb,var(--bg) 90%,transparent);-webkit-backdrop-
     <div class="wrap">
       <div class="tpls" id="tpls"></div>
       <p class="note" data-i18n="t3">The businesses, prices and phone numbers in these samples are fictional. Any resemblance to a real business is unintended.</p>
-    </div>
-  </section>
-</div>
-
-<!-- PRICING -->
-<div class="view" data-view="pricing">
-  <div class="phead"><div class="wrap"><h1 data-i18n="p1">What it costs</h1><p class="lead" data-i18n="p2">Our standard prices, set against what US freelancers and small studios charge in 2026. Your written quote can come in lower or higher once we know the details.</p></div></div>
-  <section>
-    <div class="wrap">
-      <div class="shead"><div class="txt"><h2 data-i18n="p3">One-time projects</h2></div></div>
-      <div class="ptable" id="oneGrid"></div>
-    </div>
-  </section>
-  <section class="alt">
-    <div class="wrap">
-      <div class="shead">
-        <div class="txt"><h2 data-i18n="p4">Monthly plans</h2></div>
-        <div class="toggle" role="group" aria-label="Billing period">
-          <button type="button" data-bill="mo" aria-pressed="true" data-i18n="p5">Monthly</button>
-          <button type="button" data-bill="yr" aria-pressed="false" data-i18n="p6">Yearly, 2 months free</button>
-        </div>
-      </div>
-      <div class="slist" id="subGrid"></div>
-      <p class="fine" data-i18n="p7">Projects: 50% deposit to start, the rest at launch. Monthly and yearly plans renew automatically until you cancel, and you can cancel anytime by email. Domains, hosting and third-party licenses are billed at cost in your name. See our Refund Policy for details.</p>
-    </div>
-  </section>
-  <section>
-    <div class="wrap faq">
-      <h2 data-i18n="q0">Questions people ask us</h2>
-      <div>
-        <details class="q"><summary data-i18n="q1">Do I own the website?</summary><p data-i18n="q1a">Yes. The domain, the content and the design are yours. If you ever want to move on, we hand everything over.</p></details>
-        <details class="q"><summary data-i18n="q2">How long does it take?</summary><p data-i18n="q2a">A one-page site usually takes about two weeks once we have your photos and text. Bigger sites take three to six weeks.</p></details>
-        <details class="q"><summary data-i18n="q3">I don't have photos or text. Can you help?</summary><p data-i18n="q3a">Yes. We write copy in English and Spanish, and we can help you get photos that show your work well.</p></details>
-        <details class="q"><summary data-i18n="q4">Can you fix my current website instead?</summary><p data-i18n="q4a">Often, yes. Put the link in the quote form and we'll tell you honestly whether fixing it or starting fresh makes more sense.</p></details>
-        <details class="q"><summary data-i18n="q5">Do you work with businesses outside New Jersey?</summary><p data-i18n="q5a">Yes. We work remotely with clients in all 50 states, over video calls, email and shared drafts.</p></details>
-        <details class="q"><summary data-i18n="q6">How do payments work?</summary><p data-i18n="q6a">Projects start with a 50% deposit and the rest is due at launch. Plans are billed monthly or yearly in advance. We accept card, ACH bank transfer and Zelle, and we send an invoice for every payment.</p></details>
-      </div>
     </div>
   </section>
 </div>
@@ -807,7 +782,7 @@ dialog{background:color-mix(in srgb,var(--bg) 90%,transparent);-webkit-backdrop-
       <p style="margin-top:12px" data-i18n="ft1">A New Jersey company working with clients across the US.</p>
       <p style="margin-top:6px">skybridgestudiosllc@gmail.com</p>
     </div>
-    <div><h4 data-i18n="ft2">Studio</h4><ul><li><a href="#services" data-i18n="n7">Services</a></li><li><a href="#work" data-i18n="n1">Work</a></li><li><a href="#templates" data-i18n="n2">Templates</a></li><li><a href="#pricing" data-i18n="n3">Pricing</a></li><li><a href="#contact" data-i18n="n10">Contact</a></li></ul></div>
+    <div><h4 data-i18n="ft2">Studio</h4><ul><li><a href="#services" data-i18n="n7">Services</a></li><li><a href="#work" data-i18n="n1">Work</a></li><li><a href="#templates" data-i18n="n2">Templates</a></li><li><a href="#contact" data-i18n="n10">Contact</a></li></ul></div>
     <div><h4 data-i18n="ft3">Legal</h4><ul><li><button type="button" data-legal="terms" data-i18n="z1">Terms</button></li><li><button type="button" data-legal="privacy" data-i18n="z2">Privacy</button></li><li><button type="button" data-legal="cookies" data-i18n="z3">Cookies</button></li><li><button type="button" data-legal="refunds" data-i18n="z4">Refunds</button></li><li><button type="button" data-legal="access" data-i18n="z5">Accessibility</button></li></ul></div>
     <p class="copy" data-i18n="ft4">© 2026 Skybridge Digital Studios LLC. All rights reserved. Stylo is a product of Skybridge Digital Studios LLC. Other product and company names mentioned on this site belong to their owners and are used only to describe compatibility; their use does not imply endorsement.</p>
   </div>
@@ -845,7 +820,7 @@ var store={get:function(k){try{return localStorage.getItem(k)}catch(e){return nu
 function L(p){return p[lang==='es'?1:0]}
 
 var ES={
-n0:'Inicio',n7:'Servicios',n8:'Nosotros',n9:'Menú',hm0:'Páginas web, apps y automatización con IA',st1:'estados donde trabajamos',st2:'idiomas, inglés y español',st3:'plantillas listas para personalizar',hm1:'Empieza con una página web. Agrega lo demás <em>cuando lo necesites.</em>',bw1:'Páginas web',bw2:'Páginas rápidas, pensadas para el teléfono, con reservas, menú o tienda integrados. Fáciles de actualizar después.',bw3:'Creamos y mantenemos las nuestras, como Stylo.',lk1:'Ver servicios →',lk2:'Ver nuestras apps →',hm5:'¿Tienes un proyecto en mente?',hm6:'Cuéntanos qué necesitas y te respondemos con preguntas o una cotización por escrito.',hm7:'Ver precios',sv1:'Servicios',sv2:'Lo que podemos hacer por tu negocio y cómo va normalmente un proyecto.',ab1:'Sobre nosotros',ab3:'Registrada en New Jersey como Skybridge Digital Studios LLC',ab4:'Trabajamos con clientes en los 50 estados',ab5:'Todo lo que entregamos viene en inglés, español o ambos',n1:'Trabajos',n2:'Plantillas',n3:'Precios',n4:'Apps',n5:'Preguntas',n6:'Pedir cotización',
+n0:'Inicio',n7:'Servicios',n8:'Nosotros',n9:'Menú',hm0:'Páginas web, apps y automatización con IA',st1:'estados donde trabajamos',st2:'idiomas, inglés y español',st3:'plantillas listas para personalizar',hm1:'Empieza con una página web. Agrega lo demás <em>cuando lo necesites.</em>',bw1:'Páginas web',bw2:'Páginas rápidas, pensadas para el teléfono, con reservas, menú o tienda integrados. Fáciles de actualizar después.',bw3:'Creamos y mantenemos las nuestras, como Stylo.',lk1:'Ver servicios →',lk2:'Ver nuestras apps →',hm5:'¿Tienes un proyecto en mente?',hm6:'Cuéntanos qué necesitas y te respondemos con preguntas o una cotización por escrito.',hm7:'Ver servicios',sv1:'Servicios',sv2:'Lo que podemos hacer por tu negocio y cómo va normalmente un proyecto.',ab1:'Sobre nosotros',ab3:'Registrada en New Jersey como Skybridge Digital Studios LLC',ab4:'Trabajamos con clientes en los 50 estados',ab5:'Todo lo que entregamos viene en inglés, español o ambos',n1:'Trabajos',n2:'Plantillas',n3:'Precios',n4:'Apps',n5:'Preguntas',n6:'Pedir cotización',
 h1:'Páginas web que te traen clientes, hechas y cuidadas por nosotros.',
 h2:'Skybridge diseña páginas web, apps y automatizaciones sencillas para pequeños negocios en todo Estados Unidos, en inglés y en español. Trabajas directamente con quienes la construyen y recibes un precio por escrito antes de empezar.',
 h3:'Ver plantillas',h4:'Pedir cotización gratis',h5:'nada de contratos antes de ver la cotización',
@@ -858,7 +833,7 @@ s10:'IA para llamadas y pedidos',s10d:'Contesta el teléfono, toma pedidos y age
 s11:'Apps móviles',s11d:'Creamos y mantenemos nuestras propias apps, así que sabemos lo que cuesta publicar una en las tiendas de apps.',
 s12:'Ciberseguridad básica',s12d:'Contraseñas, respaldos y equipos bien configurados para equipos pequeños, antes de que algo salga mal.',
 w1:'Trabajos recientes',w2:'Somos nuevos, así que la lista es corta. Todo lo que aparece es real y crece con cada proyecto.',
-w3:'En línea',n10:'Contacto',hm3:'La mayoría empieza con una página web. Cuando ya funciona, nos encargamos de lo demás.',hm4:'Seis diseños pensados según cómo consigue clientes cada tipo de negocio.',lk4:'Todos los servicios',as1:'Cotizaciones por escrito y detalladas',as2:'Inglés y español',as3:'Clientes en los 50 estados',cs1:'Alcance',cs1d:'Marca, diseño del producto, app móvil y web, funciones con IA',cs2:'Plataformas',pt1:'Precios claros',pt2:'Precios de partida de los proyectos más pedidos. Cada cotización se hace a la medida.',t3:'Los negocios, precios y teléfonos de estos ejemplos son ficticios. Cualquier parecido con un negocio real no es intencional.',r3:'Qué pasa después',r4:'Leemos cada solicitud y respondemos por correo con preguntas o una cotización por escrito.',ft2:'Estudio',ft3:'Legal',ft4:'© 2026 Skybridge Digital Studios LLC. Todos los derechos reservados. Stylo es un producto de Skybridge Digital Studios LLC. Otros nombres de productos y compañías mencionados en este sitio pertenecen a sus dueños y se usan solo para describir compatibilidad; su uso no implica respaldo.',z5:'Accesibilidad',hs1:'Hacemos la página web, las reservas, la atención de llamadas y la app. Tú sigues manejando tu negocio.',hm2:'Lo que hacemos',hm8:'Más de nuestro trabajo',hm9:'Ver las 6 plantillas',lk3:'Detalles',s2p:'Empieza aquí',w4b:'Móvil y web',ft1:'Una compañía de New Jersey que trabaja con clientes en todo Estados Unidos.',w4:'Producto propio',w5:'Stylo, app de guardarropa con IA',
+w3:'En línea',n10:'Contacto',hm3:'La mayoría empieza con una página web. Cuando ya funciona, nos encargamos de lo demás.',hm4:'Seis diseños pensados según cómo consigue clientes cada tipo de negocio.',lk4:'Todos los servicios',as1:'Cotizaciones por escrito y detalladas',as2:'Inglés y español',as3:'Clientes en los 50 estados',cs1:'Alcance',cs1d:'Marca, diseño del producto, app móvil y web, funciones con IA',cs2:'Plataformas',pt1:'Por ahora trabajamos por cotización',pt2:'Cada negocio necesita algo distinto, así que todavía no publicamos precios fijos. Cuéntanos qué necesitas y te enviamos una cotización por escrito y detallada. Es gratis y no te compromete a nada.',pt3:'Pedir cotización',q7:'¿Cuánto cuesta una página web?',q7a:'Cotizamos cada proyecto cuando sabemos lo que necesitas. Envíanos una solicitud corta y te respondemos con una cotización por escrito y detallada, normalmente en dos días hábiles.',t3:'Los negocios, precios y teléfonos de estos ejemplos son ficticios. Cualquier parecido con un negocio real no es intencional.',r3:'Qué pasa después',r4:'Leemos cada solicitud y respondemos por correo con preguntas o una cotización por escrito.',ft2:'Estudio',ft3:'Legal',ft4:'© 2026 Skybridge Digital Studios LLC. Todos los derechos reservados. Stylo es un producto de Skybridge Digital Studios LLC. Otros nombres de productos y compañías mencionados en este sitio pertenecen a sus dueños y se usan solo para describir compatibilidad; su uso no implica respaldo.',z5:'Accesibilidad',hs1:'Hacemos la página web, las reservas, la atención de llamadas y la app. Tú sigues manejando tu negocio.',hm2:'Lo que hacemos',hm8:'Más de nuestro trabajo',hm9:'Ver las 6 plantillas',lk3:'Detalles',s2p:'Empieza aquí',w4b:'Móvil y web',ft1:'Una compañía de New Jersey que trabaja con clientes en todo Estados Unidos.',w4:'Producto propio',w5:'Stylo, app de guardarropa con IA',
 w6:'La diseñamos y construimos desde cero: la marca, la app y la IA. Fotografías tu ropa y te arma atuendos para cada ocasión usando solo lo que ya tienes.',w7:'Probar Stylo',
 w8:'Web y marca',w9:'La página donde estás',w10:'Logo, textos en dos idiomas, seis plantillas por tipo de negocio y el formulario de cotización al final. La usamos para mostrarte cómo trabajamos.',
 w11:'este espacio está libre',w12:'Tu negocio puede ser el próximo aquí.',w13:'Los primeros clientes reciben toda nuestra atención y una reseña en esta página cuando su sitio esté en línea.',w14:'Empezar un proyecto',
@@ -876,7 +851,7 @@ q0:'Lo que la gente nos pregunta',q1:'¿La página es mía?',q1a:'Sí. El domini
 q2:'¿Cuánto tiempo toma?',q2a:'Una página sencilla toma unas dos semanas desde que tenemos tus fotos y textos. Las más grandes, de tres a seis semanas.',
 q3:'No tengo fotos ni textos. ¿Me ayudan?',q3a:'Sí. Escribimos los textos en inglés y español, y te ayudamos a conseguir fotos que muestren bien tu trabajo.',
 q4:'¿Pueden arreglar mi página actual?',q4a:'Muchas veces sí. Pon el enlace en el formulario y te diremos con honestidad si conviene arreglarla o empezar de nuevo.',
-q5:'¿Trabajan con negocios fuera de New Jersey?',q5a:'Sí. Trabajamos a distancia con clientes en los 50 estados, por videollamada, correo y borradores compartidos.',q6:'¿Cómo funcionan los pagos?',q6a:'Los proyectos empiezan con un depósito del 50% y el resto se paga al lanzar. Los planes se cobran mensual o anualmente por adelantado. Aceptamos tarjeta, transferencia ACH y Zelle, y enviamos factura por cada pago.',
+q5:'¿Trabajan con negocios fuera de New Jersey?',q5a:'Sí. Trabajamos a distancia con clientes en los 50 estados, por videollamada, correo y borradores compartidos.',q6:'¿Cómo funcionan los pagos?',q6a:'Los proyectos empiezan con un depósito del 50% y el resto se paga al lanzar. Los servicios continuos se cobran cada mes. Aceptamos tarjeta, transferencia ACH y Zelle, y enviamos factura por cada pago.',
 r0:'Cuéntanos de tu proyecto',r1:'Toma unos dos minutos. Te respondemos con preguntas o con una cotización por escrito.',r2:'¿Prefieres escribirnos directo?',
 l1:'Tu nombre',l2:'Nombre del negocio',l3:'Correo',l4:'Teléfono (opcional)',l5:'Plantilla',l6:'¿Qué tipo de negocio?',l7:'¿Qué necesitas?',l8:'¿Para cuándo lo necesitas?',l9:'Página actual, si tienes',l10:'¿Algo más que debamos saber?',l11:'Enviar mi solicitud',
 x1:'Abrir correo para enviar',x2:'Copiar solicitud',m1:'Usar esta plantilla',m2:'Cerrar',
@@ -1012,6 +987,7 @@ var bill='mo';
 function money(n){return '$'+n.toLocaleString('en-US')}
 function card(o,body){return '<article class="price glass lift'+(o.pop?' pop':'')+'" data-rise>'+(o.pop?'<span class="flag">'+L(['most picked','la más elegida'])+'</span>':'')+'<h3>'+L(o.n)+'</h3>'+body+'<p class="muted">'+L(o.d)+'</p><ul>'+o.i.map(function(x){return '<li>'+L(x)+'</li>'}).join('')+'</ul>'+(o.x?'<p class="extra">'+L(o.x)+'</p>':'')+'</article>'}
 function renderPrices(){
+  if(!$('#oneGrid')){ renderShowcase(); return; }
   var from=L(['from','desde']);
   $('#oneGrid').innerHTML=ONE.map(function(o){return card(o,'<div class="amt">'+(o.from?'<small>'+from+'</small>':'')+o.p+'</div>')}).join('');
   $('#subGrid').innerHTML=SUBS.map(function(o){
@@ -1028,7 +1004,7 @@ var CO='Skybridge Digital Studios LLC', EM='skybridgestudiosllc@gmail.com', UPD=
 var LEGAL={
 terms:{t:['Terms of Service','Términos del servicio'],en:
 '<h4>1. Who we are</h4><p>These terms are an agreement between you and '+CO+', a New Jersey limited liability company ("Skybridge", "we", "us"). They apply to this website and to every service we provide. By using the site or hiring us, you agree to them.</p>'+
-'<h4>2. Quotes and scope</h4><p>Every project starts with a written quote or proposal that lists what we will deliver, the price and the timeline. Quotes are valid for 30 days. Work outside the agreed scope is quoted separately before we do it. Prices on this website are starting points, not offers.</p>'+
+'<h4>2. Quotes and scope</h4><p>Every project starts with a written quote or proposal that lists what we will deliver, the price and the timeline. Quotes are valid for 30 days. Work outside the agreed scope is quoted separately before we do it.</p>'+
 '<h4>3. Payment</h4><p>One-time projects require a 50% deposit before work begins and the remaining balance before launch or final delivery. Larger projects, such as mobile apps, may be billed by milestone. Monthly and yearly plans are billed in advance. Invoices are due within 7 days. If a payment is more than 15 days late, we may pause work or services until it is paid.</p>'+
 '<h4>4. Automatic renewal and cancellation</h4><p>Monthly plans renew every month and yearly plans renew every year at the price shown when you signed up, until you cancel. We will email you at least 30 days before a yearly plan renews. You can cancel anytime by emailing '+EM+'. Cancellation takes effect at the end of the current billing period. Refunds are covered by our Refund Policy.</p>'+
 '<h4>5. Your responsibilities</h4><p>You agree to provide content, access and feedback on time, and you confirm that you have the rights to any text, images, logos or data you give us. Delays on your side can move the timeline. If a project is on hold for more than 60 days because we are waiting on you, we may close it and invoice the work completed.</p>'+
@@ -1043,7 +1019,7 @@ terms:{t:['Terms of Service','Términos del servicio'],en:
 '<h4>14. Trademarks and third-party names</h4><p>Skybridge and Stylo are names used by '+CO+'. Names of other companies, platforms and products that appear on this site or in our proposals belong to their owners. We mention them only to describe what we build on or connect to, and we are not affiliated with or endorsed by them. Sample businesses shown in our templates are fictional.</p><h4>15. Contact</h4><p>'+EM+'</p>',
 es:
 '<h4>1. Quiénes somos</h4><p>Estos términos son un acuerdo entre tú y '+CO+', una compañía de responsabilidad limitada de New Jersey ("Skybridge", "nosotros"). Aplican a este sitio web y a todos nuestros servicios. Al usar el sitio o contratarnos, los aceptas.</p>'+
-'<h4>2. Cotizaciones y alcance</h4><p>Cada proyecto empieza con una cotización o propuesta por escrito que indica lo que entregaremos, el precio y el plazo. Las cotizaciones son válidas por 30 días. El trabajo fuera del alcance acordado se cotiza aparte antes de hacerlo. Los precios de este sitio son de referencia, no ofertas.</p>'+
+'<h4>2. Cotizaciones y alcance</h4><p>Cada proyecto empieza con una cotización o propuesta por escrito que indica lo que entregaremos, el precio y el plazo. Las cotizaciones son válidas por 30 días. El trabajo fuera del alcance acordado se cotiza aparte antes de hacerlo.</p>'+
 '<h4>3. Pagos</h4><p>Los proyectos únicos requieren un depósito del 50% antes de empezar y el saldo antes del lanzamiento o la entrega final. Los proyectos grandes, como apps, pueden facturarse por etapas. Los planes mensuales y anuales se cobran por adelantado. Las facturas vencen a los 7 días. Si un pago se atrasa más de 15 días, podemos pausar el trabajo o los servicios hasta que se pague.</p>'+
 '<h4>4. Renovación automática y cancelación</h4><p>Los planes mensuales se renuevan cada mes y los anuales cada año, al precio mostrado al contratar, hasta que canceles. Te enviaremos un correo al menos 30 días antes de que se renueve un plan anual. Puedes cancelar cuando quieras escribiendo a '+EM+'. La cancelación aplica al final del período ya pagado. Los reembolsos se rigen por nuestra Política de reembolsos.</p>'+
 '<h4>5. Tus responsabilidades</h4><p>Te comprometes a entregar contenido, accesos y comentarios a tiempo, y confirmas que tienes los derechos de los textos, imágenes, logos o datos que nos des. Los retrasos de tu parte pueden mover el plazo. Si un proyecto queda detenido más de 60 días esperando por ti, podemos cerrarlo y facturar lo trabajado.</p>'+
@@ -1127,7 +1103,7 @@ function setTyp(t){root.dataset.type=t; requestAnimationFrame(function(){movePil
 var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
 var MQ=[['Websites','Páginas web'],['Online stores','Tiendas en línea'],['Booking systems','Sistemas de reservas'],['AI receptionists','Recepcionistas con IA'],['Social media','Redes sociales'],['Mobile apps','Apps móviles'],['Logos and branding','Logos y marca'],['Cybersecurity','Ciberseguridad'],['English and Spanish','Inglés y español']];
 function renderMarquee(){ var h=MQ.map(function(m){return '<span class="glass">'+L(m)+'</span>'}).join(''); $('#mtrack').innerHTML=h+h; }
-var VIEWS=['home','services','work','templates','pricing','apps','about','contact'];
+var VIEWS=['home','services','work','templates','apps','about','contact'];
 function movePill(wrap,target){ if(!wrap) return; var p=wrap.querySelector('.navpill'); if(!p) return; if(!target||!target.offsetWidth){p.style.width='0';return} p.style.width=target.offsetWidth+'px'; p.style.transform='translateX('+target.offsetLeft+'px)'; }
 function movePills(){ movePill($('#navlinks'),$('#navlinks a[aria-current="page"]')); movePill($('#seg'),$('#seg [aria-pressed="true"]')); }
 function countUp(){ if(reduce) return; $$('[data-count]').forEach(function(el){ var t=+el.dataset.count, s=performance.now(); (function f(n){ var k=Math.min(1,(n-s)/1100); el.textContent=Math.round(t*(1-Math.pow(1-k,3))); if(k<1) requestAnimationFrame(f); })(s); }); }
@@ -1160,10 +1136,11 @@ function frame(t){return '<div class="frame"><div class="chrome"><span>'+L(URLX)
 function renderShowcase(){
   $('#heroFrame').innerHTML='<div class="chrome"><span>'+L(URLX)+'</span></div><div class="vw"><div class="pg">'+TPL[0].html+'</div></div>';
   $('#teaser').innerHTML=[0,1,2].map(function(i){var t=TPL[i]; return '<figure>'+frame(t)+'<figcaption><b>'+t.name+'</b>'+L(t.who)+'</figcaption></figure>'}).join('');
-  $('#tease3').innerHTML=ONE.slice(0,3).map(function(o){ return '<div><h3>'+L(o.n)+'</h3><div class="amt">'+(o.from?'<small>'+L(['from','desde'])+'</small>':'')+o.p+'</div><p class="muted" style="font-size:.95rem">'+L(o.d)+'</p></div>'; }).join('');
+  if($('#tease3')) $('#tease3').innerHTML=ONE.slice(0,3).map(function(o){ return '<div><h3>'+L(o.n)+'</h3><div class="amt">'+(o.from?'<small>'+L(['from','desde'])+'</small>':'')+o.p+'</div><p class="muted" style="font-size:.95rem">'+L(o.d)+'</p></div>'; }).join('');
   fit();
 }
 function renderPrices(){
+  if(!$('#oneGrid')){ renderShowcase(); return; }
   var from=L(['from','desde']);
   $('#oneGrid').innerHTML=ONE.map(function(o){ return '<div class="prow"><div><h3>'+L(o.n)+(o.pop?'<span class="badge">'+L(['Most popular','La más pedida'])+'</span>':'')+'</h3><p class="muted" style="margin-top:6px;font-size:.95rem">'+L(o.d)+'</p></div><p class="inc">'+o.i.map(function(x){return L(x)}).join(', ')+'.</p><div class="amt">'+(o.from?'<small>'+from+'</small>':'')+o.p+'</div></div>'; }).join('');
   $('#subGrid').innerHTML=SUBS.map(function(o){
