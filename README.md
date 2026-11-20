@@ -8,26 +8,49 @@ Es una copia exacta del artifact de Claude (versión `1795132498-e0b8`, 19 nov 2
 ## Estructura
 
 ```
-public/index.html                    el sitio completo
-public/Digital-Accounting-Tax/       demo para el cliente Digital Accounting & Tax Inc.
-netlify/edge-functions/demo-acceso.ts  acceso privado al demo (solo con enlace de acceso)
-netlify.toml                         configuración de Netlify (publica public/, sin build)
+public/index.html                          el sitio completo
+public/clientes/<slug>/                    demos privados de clientes (uno por carpeta)
+public/clientes/digital-accounting-tax/    demo para Digital Accounting & Tax Inc.
+netlify/edge-functions/acceso-clientes/    acceso privado a los demos (index.ts) y lista de clientes (clientes.ts)
+plantilla-cliente/                         portada base para un cliente nuevo (no se publica)
+netlify.toml                               configuración de Netlify (publica public/, sin build)
 ```
 
-## Demo: Digital Accounting & Tax
+## Demos privados de clientes
 
-Sitio de muestra para presentar a Carlos Moran (Digital Accounting & Tax Inc.). Se abre en `/Digital-Accounting-Tax`.
+Cada cliente tiene su carpeta en `public/clientes/<slug>/` y entra con un enlace de acceso:
+`https://www.skybridgestd.space/clientes/<slug>/?acceso=LLAVE`
 
-- `/Digital-Accounting-Tax/` abre siempre `en/index.html` (inicio en inglés), en celular y computadora.
-- Páginas: `es/index.html`, `servicios`, `itin`, `nosotros`, `contacto`, `privacidad`, `cookies`, `terminos`, `accesibilidad`, y sus equivalentes en `en/`.
-- `/Digital-Accounting-Tax/telefono.html`: el sitio dentro de dos iPhones (español e inglés), con selector de paleta, para presentarlo.
-- **Privada.** Solo entra quien abre el enlace de acceso `https://www.skybridgestd.space/Digital-Accounting-Tax/?acceso=LLAVE`. La función `netlify/edge-functions/demo-acceso.ts` revisa la llave (sin importar mayúsculas), guarda una cookie por 30 días, quita la llave de la barra de direcciones y abre el inicio en inglés (el visitante puede cambiar a español). El único archivo público es `preview.jpg`, la imagen que muestran WhatsApp y iMessage al compartir el enlace. En un teléfono, `telefono.html` abre el sitio real en vez de las maquetas. Cualquier otra persona recibe "Esta página no está disponible" (404), sin HTML, imágenes ni estilos del demo.
-  - La llave vive en Netlify, no en este repositorio: **Site configuration → Environment variables → `DAT_ACCESS_KEY`**. Puede tener varias llaves separadas por espacios.
-  - Opcional: `DAT_ACCESS_UNTIL` con una fecha (`2027-01-31`). Después de esa fecha nadie entra.
-  - Para quitar el acceso: cambia o borra `DAT_ACCESS_KEY` y vuelve a publicar. Las cookies viejas dejan de servir.
-  - Si `DAT_ACCESS_KEY` no existe, el demo queda cerrado para todos.
-- No está enlazada desde la página principal y no se indexa en Google (`noindex` en cada página y `X-Robots-Tag` en `netlify.toml`). Cada página muestra una etiqueta "Demo de Skybridge Digital Studios".
+- La función `acceso-clientes` revisa la llave (sin importar mayúsculas), guarda una cookie por 30 días, quita la llave de la barra de direcciones y abre la portada del cliente. Cualquier otra persona recibe "Esta página no está disponible" (404), sin HTML, imágenes ni estilos del demo. `/clientes/` y cualquier carpeta que no esté en la lista también dan 404.
+- **La portada** (`index.html` de la carpeta) tiene el logo del cliente, botones para ver el sitio en español o en inglés, "Verlo en el teléfono" (solo en computadora) y "Aprobar el diseño" / "Pedir cambios", que abren un correo prellenado a skybridgestudiosllc@gmail.com. Recuerda el idioma elegido. La etiqueta "Demo" de cada página del sitio lleva de vuelta a la portada.
+- Las llaves viven en Netlify, no en el repositorio: **Site configuration → Environment variables**, con el nombre que diga `envKey` en `clientes.ts`. Pueden ser varias separadas por espacios; conviene una por persona (mínimo 16 caracteres al azar) para poder quitarle el acceso a una sin afectar a las demás.
+- Fecha límite opcional en la variable `envUntil` (por ejemplo `2027-01-31`). Después de esa fecha nadie entra.
+- Para quitar el acceso: cambia o borra la llave y vuelve a publicar. Las cookies viejas dejan de servir. Si la variable no existe, el demo queda cerrado para todos.
+- Caché: las páginas HTML nunca se guardan (así quitar una llave corta el acceso al instante). Las fuentes e imágenes con hash en el nombre se guardan un año en el navegador del visitante; `site.css` y `site.js` se guardan pero se revisan en cada visita.
+- Nada se indexa: `noindex` en cada página y `X-Robots-Tag` para `/clientes/*` en `netlify.toml` y en la función. No se enlazan desde la página principal.
+- Cuando el sitio real del cliente esté en línea, pon su dirección en `launchedUrl` y quien tenga acceso irá directo allí.
+
+### Añadir un cliente
+
+1. Copia su sitio a `public/clientes/<slug>/` (con `es/`, `en/`, `assets/` y un `preview.jpg` de 1200×630 para la vista previa de WhatsApp).
+2. Copia `plantilla-cliente/index.html` como `public/clientes/<slug>/index.html` y cambia el nombre, el bloque `PORTAL`, los colores, el logo y las fuentes.
+3. Añade una entrada en `netlify/edge-functions/acceso-clientes/clientes.ts`.
+4. Crea la variable de la llave en Netlify y publica.
+5. Envía el enlace `https://www.skybridgestd.space/clientes/<slug>/?acceso=LLAVE`.
+
+### Digital Accounting & Tax
+
+Sitio de muestra para Carlos Moran (Digital Accounting & Tax Inc.), en `/clientes/digital-accounting-tax/`.
+
+- Llave: `DAT_ACCESS_KEY` (y opcional `DAT_ACCESS_UNTIL`). La cookie sigue siendo `dat_acceso`, así que quien ya entró no tiene que volver a abrir el enlace.
+- **El primer enlace que se envió** (`/Digital-Accounting-Tax/?acceso=LLAVE`) sigue funcionando: lleva a la portada nueva. Con cookie válida, las direcciones viejas redirigen a las nuevas; sin acceso dan 404, así que no revelan la dirección nueva.
+- `telefono.html`: el sitio dentro de dos iPhones (español e inglés), con selector de paleta. En un teléfono abre el sitio real.
+- Las imágenes `public/work/dat-*` siguen protegidas (`extraProtected`). Cuando Carlos apruebe por escrito mostrar el caso en "Work", quita esa línea y reemplaza la tarjeta de relleno.
 - Cuando el cliente apruebe, la versión de producción (con canonical, hreflang, sitemap y robots apuntando a digital.tax) se publica en su propio dominio, no aquí.
+
+## Aviso de Netlify
+
+El plan gratuito de Netlify añade abajo a la derecha una etiqueta "Powered by Netlify" (unos 202×64 px). En pantallas estrechas el aviso de cookies sube para no quedar debajo de ella (`.cnote` en `public/index.html`). Las portadas de clientes dejan espacio abajo por la misma razón.
 
 ## Ver en local
 

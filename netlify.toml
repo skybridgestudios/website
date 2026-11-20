@@ -9,8 +9,9 @@
     X-Frame-Options = "SAMEORIGIN"
     Referrer-Policy = "strict-origin-when-cross-origin"
 
-# Client demo for Digital Accounting & Tax: viewable by link, never indexed.
+# Private client demos (public/clientes/<slug>/): viewable by access link, never indexed.
+# Access is checked by netlify/edge-functions/acceso-clientes/.
 [[headers]]
-  for = "/Digital-Accounting-Tax/*"
+  for = "/clientes/*"
   [headers.values]
     X-Robots-Tag = "noindex, nofollow"

@@ -295,6 +295,8 @@ dialog::backdrop{background:rgba(10,16,30,.45)}
 .legal ul{padding-left:20px;margin:8px 0}
 .cnote{position:fixed;left:16px;bottom:16px;z-index:41;max-width:min(420px,calc(100% - 32px));padding:16px;display:grid;gap:10px;font-size:.9rem;border-radius:12px;background:var(--bg);border:1px solid var(--line);box-shadow:0 20px 40px -20px rgba(0,0,0,.35)}
 .cnote[hidden]{display:none}
+/* Netlify's free-plan badge sits fixed in the bottom-right corner (about 202x64 px). On narrow screens it would cover the cookie notice's buttons, so the notice sits above it. */
+@media (max-width:660px){.cnote{bottom:calc(76px + env(safe-area-inset-bottom,0px))}}
 .cnote div{display:flex;gap:14px;align-items:center;justify-content:flex-end}
 
 /* owner preview panel */
