@@ -53,7 +53,11 @@
     document.addEventListener('click', function (e) { if (!palPanel.hidden && !palPanel.contains(e.target)) openPanel(false); });
     document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !palPanel.hidden) { openPanel(false); dockBtn.focus(); } });
   }
-  try { if (window.self !== window.top) root.classList.add('embed'); } catch (e) { root.classList.add('embed'); }
+  /* hide the palette button only inside our own phone preview (telefono.html), never in other frames */
+  try {
+    if (/[?&]view=phone/.test(location.search)) sessionStorage.setItem('dat-phone', '1');
+    if (window.self !== window.top && sessionStorage.getItem('dat-phone') === '1') root.classList.add('embed');
+  } catch (e) {}
   window.addEventListener('message', function (e) { var d = e.data || {}; if (d.datPal) setPal(d.datPal); });
 
   /* document checklist tabs */
