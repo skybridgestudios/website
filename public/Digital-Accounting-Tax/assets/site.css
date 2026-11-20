@@ -520,3 +520,11 @@ footer{background:var(--night);color:var(--on-night-muted);font-size:14.5px;bord
 .credit a{color:var(--on-night);font-weight:600;text-decoration:none;background-image:linear-gradient(var(--accent),var(--accent));background-size:100% 1px;background-position:0 100%;background-repeat:no-repeat;padding-bottom:2px;transition:color .2s}
 .credit a:hover{color:var(--accent)}
 .credit a:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:2px}
+
+/* phone: one floating control per corner, demo label at the end of the page */
+@media (max-width:720px){
+  .credit-wrap{padding-bottom:22px}
+  body .demo-pill{position:static;display:block;margin:0;border-radius:0;padding:16px 20px 104px;text-align:center;background:var(--night);color:var(--on-night-muted);font-weight:500;border-top:1px solid color-mix(in srgb,var(--on-night) 10%,transparent)}
+  .dock-btn{padding:6px;gap:0}
+  .dock-btn>span{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+}

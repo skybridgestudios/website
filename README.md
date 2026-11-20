@@ -18,10 +18,10 @@ netlify.toml                         configuración de Netlify (publica public/,
 
 Sitio de muestra para presentar a Carlos Moran (Digital Accounting & Tax Inc.). Se abre en `/Digital-Accounting-Tax`.
 
-- `/Digital-Accounting-Tax/` envía a `es/` o `en/` según el idioma del navegador.
+- `/Digital-Accounting-Tax/` abre siempre `en/index.html` (inicio en inglés), en celular y computadora.
 - Páginas: `es/index.html`, `servicios`, `itin`, `nosotros`, `contacto`, `privacidad`, `cookies`, `terminos`, `accesibilidad`, y sus equivalentes en `en/`.
 - `/Digital-Accounting-Tax/telefono.html`: el sitio dentro de dos iPhones (español e inglés), con selector de paleta, para presentarlo.
-- **Privada.** Solo entra quien abre el enlace de acceso `https://www.skybridgestd.space/Digital-Accounting-Tax/?acceso=LLAVE`. La función `netlify/edge-functions/demo-acceso.ts` revisa la llave, guarda una cookie por 30 días y quita la llave de la barra de direcciones. Cualquier otra persona recibe "Esta página no está disponible" (404), sin HTML, imágenes ni estilos del demo.
+- **Privada.** Solo entra quien abre el enlace de acceso `https://www.skybridgestd.space/Digital-Accounting-Tax/?acceso=LLAVE`. La función `netlify/edge-functions/demo-acceso.ts` revisa la llave (sin importar mayúsculas), guarda una cookie por 30 días, quita la llave de la barra de direcciones y abre el inicio en inglés (el visitante puede cambiar a español). El único archivo público es `preview.jpg`, la imagen que muestran WhatsApp y iMessage al compartir el enlace. En un teléfono, `telefono.html` abre el sitio real en vez de las maquetas. Cualquier otra persona recibe "Esta página no está disponible" (404), sin HTML, imágenes ni estilos del demo.
   - La llave vive en Netlify, no en este repositorio: **Site configuration → Environment variables → `DAT_ACCESS_KEY`**. Puede tener varias llaves separadas por espacios.
   - Opcional: `DAT_ACCESS_UNTIL` con una fecha (`2027-01-31`). Después de esa fecha nadie entra.
   - Para quitar el acceso: cambia o borra `DAT_ACCESS_KEY` y vuelve a publicar. Las cookies viejas dejan de servir.

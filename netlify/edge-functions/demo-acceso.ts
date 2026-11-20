@@ -1,9 +1,11 @@
 // Private access to the Digital Accounting & Tax demo.
 //
 // Only someone who opens the access link (…/Digital-Accounting-Tax/?acceso=KEY)
-// gets in. The function checks the key, saves a 30-day cookie and removes the key
-// from the address bar. Everyone else gets a plain "page not available" (404),
-// with no HTML, images or styles from the demo.
+// gets in. The function checks the key (capital letters don't matter), saves a
+// 30-day cookie, removes the key from the address bar and opens the English home
+// page (the visitor can switch to Spanish there). Everyone else gets a plain "page not available" (404), with no HTML or
+// styles from the demo. The only public file is preview.jpg, the image WhatsApp,
+// iMessage and email apps show as the link preview.
 //
 // Settings live in Netlify (Site configuration → Environment variables), never in
 // this repository:
@@ -18,6 +20,7 @@ const PROTECTED = ["/digital-accounting-tax", "/work/dat-"];
 const PARAM = "acceso";
 const COOKIE = "dat_acceso";
 const MAX_AGE = 60 * 60 * 24 * 30; // 30 days
+const PUBLIC_FILES = ["/digital-accounting-tax/preview.jpg"]; // link preview image only
 
 const DENIED_HTML = `<!doctype html>
 <html lang="es"><head><meta charset="utf-8">
@@ -48,7 +51,37 @@ function isProtected(pathname: string): boolean {
   } catch {
     return true; // malformed path: treat as protected, it will be denied
   }
+  if (PUBLIC_FILES.includes(path)) return false;
   return PROTECTED.some((p) => path.startsWith(p));
+}
+
+const normalize = (key: string) => key.trim().toLowerCase();
+
+function escapeAttr(text: string): string {
+  return text.replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/</g, "&lt;");
+}
+
+// Page returned to a valid access link. People are sent on at once; link-preview
+// bots (WhatsApp, iMessage, email) read the title and image instead of a 404.
+function welcome(origin: string, target: string): string {
+  const t = escapeAttr(target);
+  return `<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Digital Accounting &amp; Tax: website proposal</title>
+<meta property="og:type" content="website">
+<meta property="og:title" content="Digital Accounting &amp; Tax: website proposal">
+<meta property="og:description" content="Private demo prepared by Skybridge Digital Studios. Available in English and Spanish.">
+<meta property="og:image" content="${escapeAttr(origin)}/Digital-Accounting-Tax/preview.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#0A1A2F">
+<meta http-equiv="refresh" content="0;url=${t}">
+<script>location.replace("${t}")</script>
+<style>body{margin:0;min-height:100vh;background:#0A1A2F}</style>
+</head><body><noscript><a href="${t}">Open the site</a></noscript></body></html>`;
 }
 
 async function sha256(text: string): Promise<string> {
@@ -87,7 +120,7 @@ export default async (request: Request, context: { next: () => Promise<Response>
   const url = new URL(request.url);
   if (!isProtected(url.pathname)) return; // the rest of the site is untouched
 
-  const keys = (Netlify.env.get("DAT_ACCESS_KEY") ?? "").split(/\s+/).filter(Boolean);
+  const keys = (Netlify.env.get("DAT_ACCESS_KEY") ?? "").split(/\s+/).filter(Boolean).map(normalize);
   if (keys.length === 0) return denied();
 
   const until = Netlify.env.get("DAT_ACCESS_UNTIL");
@@ -102,16 +135,20 @@ export default async (request: Request, context: { next: () => Promise<Response>
   // 1. Arriving with the access link: check it, save the cookie, clean the URL.
   const given = url.searchParams.get(PARAM);
   if (given !== null) {
-    const hash = await sha256(given.trim());
+    const hash = await sha256(normalize(given));
     if (!matches(hash)) return denied();
     url.searchParams.delete(PARAM);
-    return new Response(null, {
-      status: 302,
+    // The demo's front door always opens the English home page, on phones and computers.
+    const isFrontDoor = /^\/digital-accounting-tax\/?(index\.html)?$/i.test(url.pathname);
+    const target = isFrontDoor ? "/Digital-Accounting-Tax/en/index.html" + url.search : url.pathname + url.search;
+    return new Response(welcome(url.origin, target), {
+      status: 200,
       headers: {
-        location: url.pathname + url.search,
+        "content-type": "text/html; charset=utf-8",
         "set-cookie": `${COOKIE}=${hash}; Path=/; Max-Age=${MAX_AGE}; HttpOnly; Secure; SameSite=Lax`,
         "cache-control": "no-store",
         "referrer-policy": "no-referrer",
+        "x-robots-tag": "noindex, nofollow",
       },
     });
   }
